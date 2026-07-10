@@ -1,25 +1,41 @@
-CatalogVideoCard = (u) => {
+CatalogVideoCard = (n) => {
   const {
-    video: l,
-    userState: p,
-    watchedVideos: m,
-    playlistItems: y
+    video: s,
+    userState: l,
+    watchedVideos: u,
+    playlistItems: p
   }
-    = u;
+    = n,
+    {
+      ref: m,
+      isPointerInside: g,
+      isHovered: y,
+      onMouseEnter: x,
+      onMouseLeave: E
+    }
+      = useHoverPreview();
   return reactExports.createElement(
     reactExports.Fragment,
     null,
     reactExports.createElement(
       'div',
       {
-        className: `ds-catalog-video-card ${ l.private ? 'ds-catalog-video-card--premium' : '' }`,
-        'data-testid': 'catalog-video-card'
+        ref: m,
+        className: `ds-catalog-video-card ${ s.private ? 'ds-catalog-video-card--premium' : '' }`,
+        'data-testid': 'catalog-video-card',
+        onMouseEnter: x,
+        onMouseLeave: E
       },
-      reactExports.createElement(VideoThumbnail, {
-        video: l,
-        watchedVideos: m,
-        showDifficulty: !1
-      }),
+      reactExports.createElement(
+        VideoThumbnail,
+        {
+          video: s,
+          watchedVideos: u,
+          showDifficulty: !1,
+          isPointerInside: g,
+          isHovered: y
+        }
+      ),
       reactExports.createElement(
         'div',
         {
@@ -32,14 +48,14 @@ CatalogVideoCard = (u) => {
           },
           reactExports.createElement('p', {
             className: 'ds-catalog-video-card__title'
-          }, l.title),
+          }, s.title),
           reactExports.createElement(
             VideoOptions,
             {
-              video: l,
-              userState: p,
-              watchedVideos: m,
-              playlistItems: y,
+              video: s,
+              userState: l,
+              watchedVideos: u,
+              playlistItems: p,
               cssClass: 'ds-catalog-video-card__video-options'
             }
           )
@@ -55,10 +71,10 @@ CatalogVideoCard = (u) => {
               className: 'ds-catalog-video-card__badges'
             },
             reactExports.createElement(LevelBadge, {
-              level: l.level
+              level: s.level
             }),
-            reactExports.createElement(VideoDifficultyBadge, { difficultyScore: l.difficultyScore }),
-            l.private &&
+            reactExports.createElement(VideoDifficultyBadge, { difficultyScore: s.difficultyScore }),
+            s.private &&
               reactExports.createElement(
                 Badge,
                 {
@@ -68,7 +84,7 @@ CatalogVideoCard = (u) => {
                 },
                 'Premium'
               ),
-            (l.tags.includes('+18') || l.tags.includes('18+')) &&
+            (s.tags.includes('+18') || s.tags.includes('18+')) &&
               reactExports.createElement(Badge, {
                 variant: 'error-alternative',
                 size: 'sm'

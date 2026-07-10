@@ -1,4 +1,4 @@
-function VideoDifficultyBadge({ difficultyScore = 0 }) {
+export function VideoDifficultyBadge({ difficultyScore = 0 }) {
   return reactExports.createElement(
     Badge,
     {

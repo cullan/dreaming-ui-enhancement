@@ -1,593 +1,592 @@
-VideoSection = (u) => {
+import { VideoDifficultyBadge } from'./index-B8n8Etgv.js';
+
+TU = (le) => {
   const {
-    language: l,
-    video: p,
-    isFetchedVideo: m,
-    offlineVideo: y,
-    manifest: b,
-    videoA: C,
-    videoB: T,
-    autoplaySeconds: R,
-    autoplayCancelled: D,
-    series: N,
-    nextVideos: F,
-    displayType: O,
-    source: q,
-    playerReference: P,
-    showPlayer: G,
-    showPlayNext: J,
-    showOverlay: $,
-    showComments: K,
-    showPremiumMessage: Q,
-    showBackgroundMessage: Z,
-    showPlaylist: ne,
-    onState: oe,
-    onNextVideo: Qe,
-    onShowPlayer: zt,
-    onShowOverlay: Jt,
-    onCancelPlayNext: z,
-    onShowComments: Qt,
-    onShowPremiumMessage: er,
-    onShowBackgroundMessage: cr,
-    onShowLoginModal: sr,
-    onMarkVideoAsWatched: ir,
-    onMarkVideoAsUnwatched: Vt
+    language: z,
+    video: N,
+    isFetchedVideo: ne,
+    offlineVideo: _,
+    manifest: ae,
+    videoA: fe,
+    videoB: m,
+    autoplaySeconds: ie,
+    autoplayCancelled: Q,
+    series: O,
+    nextVideos: $,
+    displayType: b,
+    source: K,
+    playerReference: v,
+    showPlayer: D,
+    showPlayNext: W,
+    showOverlay: L,
+    showComments: H,
+    showPremiumMessage: re,
+    showBackgroundMessage: he,
+    showPlaylist: Pe,
+    onState: xe,
+    onNextVideo: Se,
+    onShowPlayer: Oe,
+    onShowOverlay: Ke,
+    onCancelPlayNext: A,
+    onShowComments: ce,
+    onShowPremiumMessage: ue,
+    onShowBackgroundMessage: qe,
+    onShowLoginModal: Te,
+    onMarkVideoAsWatched: Ee,
+    onMarkVideoAsUnwatched: Ge
   }
-    = u,
-    mr = useHistory(),
-    ar = useLocation(),
-    {
-      browseState: dr
-    }
-      = reactExports.useContext(BrowseStateContext),
-    Ar = useOnline(),
-    xr = useInstalled(),
-    {
-      dispatch: Sr
-    }
-      = useSession(),
-    Tr = useUserState(),
-    qt = useGetAllVideos({
-      language: l
-    }),
-    gr = useGetAllWatchedVideos({
-      language: l
-    }),
-    Nr = usePremium({
-      language: l
-    }),
-    Ur = usePlaylistVideo({
-      language: l
-    }),
+  = le,
+  gt = oC(),
+  cn = qR(),
+  {
+    browseState: pn
+  }
+  = Y.useContext(eL),
+  En = Q_(),
+  kt = jR(),
+  {
+    dispatch: $e
+  }
+  = Nx(),
+  pt = Ox(),
+  U = KR({
+    language: z
+  }),
+  ht = Ux({
+    language: z
+  }),
+  Rt = J_({
+    language: z
+  }),
+  ze = tD({
+    language: z
+  }),
+  [
+    Gt,
+    an
+  ] = Y.useState(),
+  [
+    Gn,
+    hn
+  ] = Y.useState(!1),
+  Re = Y.useMemo(
+    () => {
+      if (!(!ne || !N || !O) && N.seriesId && b !== 'series') return O.find(zn => zn._id === N.seriesId)
+    },
     [
-      Yr,
-      an
-    ] = reactExports.useState(),
-    [
-      Vr,
-      Zr
-    ] = reactExports.useState(!1),
-    Mr = reactExports.useMemo(
-      () => {
-        if (!(!m || !p || !N) && p.seriesId && O !== 'series') return N.find(Hn => Hn._id === p.seriesId)
-      },
-      [
-        m,
-        p,
-        N,
-        O
-      ]
-    );
-  let In = 'embed-responsive-16by9';
-  (!p || p.aspectRatio === '2:1') &&
-    (In = 'embed-responsive-2by1');
-  const hn = reactExports.useMemo(() => p?._id && `${ CLOUDFRONT_URL }/${ p._id }.jpg`, [
-    p?._id
+      ne,
+      N,
+      O,
+      b
+    ]
+  );
+  let Er = 'embed-responsive-16by9';
+  (!N || N.aspectRatio === '2:1') &&
+  (Er = 'embed-responsive-2by1');
+  const Go = Y.useMemo(() => N?._id && `${ Z_ }/${ N._id }.jpg`, [
+    N?._id
   ]);
-  reactExports.useEffect(
+  Y.useEffect(
     () => {
       if (!new URLSearchParams(window.location.search).get('comments')) return;
-      const kn = new URLSearchParams(window.location.search),
-        ti = new URLSearchParams(window.location.search);
-      ti.delete('comments'),
-        mr.replace({
-          pathname: window.location.pathname,
-          search: ti.toString()
-        }),
-        mr.push({
-          pathname: window.location.pathname,
-          search: kn.toString()
-        })
+      const tt = new URLSearchParams(window.location.search),
+      Fi = new URLSearchParams(window.location.search);
+      Fi.delete('comments'),
+      gt.replace({
+        pathname: window.location.pathname,
+        search: Fi.toString()
+      }),
+      gt.push({
+        pathname: window.location.pathname,
+        search: tt.toString()
+      })
     },
     []
   ),
-    reactExports.useEffect(
-      () => {
-        const Hn = new URLSearchParams(ar.search).get('comments');
-        !p ||
-          !Hn ||
-          actionCommentsMobile$.next({
-            show: !0,
-            identifier: p._id,
-            page: 'Watch',
-            title: p.title,
-            url: window.location.href
-          })
-      },
-      [
-        ar,
-        p
-      ]
-    );
-  const en = 992,
-    si = 200;
-  reactExports.useEffect(
+  Y.useEffect(
     () => {
-      let Hn = window.innerWidth,
-        kn;
-      const ti = (Vn, qn) => Vn > en &&
-        qn <= en ||
-        Vn <= en &&
-          qn > en;
-      function Di() {
-        clearTimeout(kn),
-          kn = setTimeout(
-            () => {
-              const Vn = window.innerWidth;
-              ti(Hn, Vn) &&
-                (Qt(!1), an(void 0)),
-              Hn = Vn
-            },
-            si
-          )
-      }
-      return window.addEventListener('resize', Di),
-        window.addEventListener('orientationchange', Di),
-        () => {
-          clearTimeout(kn),
-          window.removeEventListener('resize', Di),
-          window.removeEventListener('orientationchange', Di)
-        }
+      const zn = new URLSearchParams(cn.search).get('comments');
+      !N ||
+      !zn ||
+      tL.next({
+        show: !0,
+        identifier: N._id,
+        page: 'Watch',
+        title: N.title,
+        url: window.location.href
+      })
     },
     [
-      Qt,
+      cn,
+      N
+    ]
+  );
+  const Je = 992,
+  ms = 200;
+  Y.useEffect(
+    () => {
+      let zn = window.innerWidth,
+      tt;
+      const Fi = (At, Ht) => At > Je &&
+      Ht <= Je ||
+      At <= Je &&
+      Ht > Je;
+      function Ho() {
+        clearTimeout(tt),
+        tt = setTimeout(
+          () => {
+            const At = window.innerWidth;
+            Fi(zn, At) &&
+            (ce(!1), an(void 0)),
+            zn = At
+          },
+          ms
+        )
+      }
+      return window.addEventListener('resize', Ho),
+      window.addEventListener('orientationchange', Ho),
+      () => {
+        clearTimeout(tt),
+        window.removeEventListener('resize', Ho),
+        window.removeEventListener('orientationchange', Ho)
+      }
+    },
+    [
+      ce,
       an
     ]
   );
-  const di = p ? `${ window.location.origin }${ getUrl({
-    path: WATCH,
-    language: l,
+  const Br = N ? `${ window.location.origin }${ Vo({
+    path: fh,
+    language: z,
     params: {
-      id: p._id
+      id: N._id
     }
   }) }` : '',
-    yi = async() => {
-      if (IS_MOBILE) try {
-        await navigator.share({
-          title: p?.title,
-          url: di
-        })
-      } catch {
-      } else Zr(!0)
-    };
-  return reactExports.createElement(
-    reactExports.Fragment,
+  oo = async() => {
+    if (GR) try {
+      await navigator.share({
+        title: N?.title,
+        url: Br
+      })
+    } catch {
+    } else hn(!0)
+  };
+  return Y.createElement(
+    Y.Fragment,
     null,
-    reactExports.createElement(
+    Y.createElement(
       'div',
       {
         className: `ds-video-section
           
-          ${ ne ? 'ds-video-section--collapse' : '' }
+        ${ Pe ? 'ds-video-section--collapse' : '' }
         
-          `,
+        `,
         'data-testid': 'video-section'
       },
-      reactExports.createElement(
-        Card,
+      Y.createElement(
+        Xg,
         {
           className: 'ds-card ds-video-section__card-video'
         },
-        reactExports.createElement(
-          Card.Body,
+        Y.createElement(
+          Xg.Body,
           {
             className: 'ds-card__body ds-video-section__card-video-body'
           },
-          reactExports.createElement(
+          Y.createElement(
             'div',
             {
               className: 'ds-card__content ds-video-section__card-video-content'
             },
-            reactExports.createElement(
+            Y.createElement(
               'div',
               {
                 className: 'ds-video-section__embed'
               },
-              reactExports.createElement(
+              Y.createElement(
                 'div',
                 {
-                  className: `embed-responsive ${ In }`
+                  className: `embed-responsive ${ Er }`
                 },
-                y &&
-                  xr &&
-                  reactExports.createElement(
-                    'div',
+                _ &&
+                kt &&
+                Y.createElement(
+                  'div',
+                  {
+                    className: 'ds-video-section__offline'
+                  },
+                  Y.createElement(
+                    'p',
                     {
-                      className: 'ds-video-section__offline'
+                      className: 'ds-video-section__offline-title'
                     },
-                    reactExports.createElement(
-                      'p',
-                      {
-                        className: 'ds-video-section__offline-title'
-                      },
-                      'Offline mode'
-                    ),
-                    Nr ? reactExports.createElement(
-                      'p',
-                      {
-                        className: 'ds-video-section__offline-label'
-                      },
-                      'It seems you\'re trying to watch a video that hasn\'t been downloaded. Download your favorite videos and you can enjoy them offline in the',
-                      reactExports.createElement(
-                        Link,
-                        {
-                          to: LIBRARY_DOWNLOADS,
-                          className: 'ds-link-primary'
-                        },
-                        ' Library > Downloads '
-                      ),
-                      'section of our website.'
-                    ) : reactExports.createElement(
-                      'p',
-                      {
-                        className: 'ds-video-section__offline-label'
-                      },
-                      'Offline downloads are available with a Premium plan.',
-                      reactExports.createElement('br', null),
-                      reactExports.createElement(
-                        Link,
-                        {
-                          to: getUrl({
-                            path: TRY_PREMIUM,
-                            language: l
-                          }),
-                          className: 'ds-link-primary'
-                        },
-                        'Upgrade to premium'
-                      ),
-                      ' ',
-                      'and enjoy watching videos offline anytime!'
-                    )
+                    'Offline mode'
                   ),
-                y &&
-                  !xr &&
-                  reactExports.createElement(
-                    'div',
+                  Rt ? Y.createElement(
+                    'p',
                     {
-                      className: 'ds-video-section__offline'
+                      className: 'ds-video-section__offline-label'
                     },
-                    reactExports.createElement(
-                      'p',
+                    'It seems you\'re trying to watch a video that hasn\'t been downloaded. Download your favorite videos and you can enjoy them offline in the',
+                    Y.createElement(
+                      wl,
                       {
-                        className: 'ds-video-section__offline-title'
+                        to: nL,
+                        className: 'ds-link-primary'
                       },
-                      'Offline mode'
+                      ' Library > Downloads '
                     ),
-                    reactExports.createElement(
-                      'p',
+                    'section of our website.'
+                  ) : Y.createElement(
+                    'p',
+                    {
+                      className: 'ds-video-section__offline-label'
+                    },
+                    'Offline downloads are available with a Premium plan.',
+                    Y.createElement('br', null),
+                    Y.createElement(
+                      wl,
                       {
-                        className: 'ds-video-section__offline-label'
+                        to: Vo({
+                          path: ZI,
+                          language: z
+                        }),
+                        className: 'ds-link-primary'
                       },
-                      'You can watch this video offline by installing the app.'
-                    )
-                  ),
-                !y &&
-                  reactExports.createElement(
-                    reactExports.Fragment,
-                    null,
-                    reactExports.createElement(
-                      'div',
-                      {
-                        className: 'ds-video-section__default'
-                      },
-                      hn &&
-                        reactExports.createElement(
-                          'img',
-                          {
-                            className: 'ds-video-section__default-image',
-                            src: hn,
-                            alt: 'thumbnail',
-                            'data-testid': 'video-thumbnail'
-                          }
-                        ),
-                      !p &&
-                        reactExports.createElement(Spinner, null)
+                      'Upgrade to premium'
                     ),
-                    G &&
-                      reactExports.createElement(
-                        reactExports.Fragment,
-                        null,
-                        q === 'youtube' &&
-                          reactExports.createElement(
-                            YoutubePlayer,
-                            {
-                              ref: P,
-                              video: p,
-                              onState: oe,
-                              'data-testid': 'video-youtube-player'
-                            }
-                          ),
-                        q === 'bunny' &&
-                          F &&
-                          F.length > 0 &&
-                          reactExports.createElement(
-                            ShakaPlayer,
-                            {
-                              ref: P,
-                              video: p,
-                              displayType: O,
-                              manifest: b,
-                              onState: oe,
-                              onNext: Qe,
-                              'data-testid': 'video-shaka-player'
-                            }
-                          )
-                      ),
-                    reactExports.createElement(
-                      PremiumMessage,
-                      {
-                        show: Q,
-                        loginCallback: () => {
-                          zt(!0),
-                          er(!1),
-                          sr(!0),
-                          Sr({
-                            type: 'SIGN_IN',
-                            payload: {
-                              isClosable: !1,
-                              message: 'Log in to watch this private video.'
-                            }
-                          })
-                        },
-                        unlockNowCallback: () => {
-                          zt(!0),
-                          er(!1),
-                          mr.push(getUrl({
-                            path: TRY_PREMIUM,
-                            language: l
-                          }))
-                        }
-                      }
-                    ),
-                    reactExports.createElement(
-                      BackgroundMessage,
-                      {
-                        show: Z,
-                        continueCallback: () => {
-                          zt(!0),
-                          cr(!1)
-                        }
-                      }
-                    ),
-                    reactExports.createElement(
-                      VideoOverlay,
-                      {
-                        show: $ &&
-                          !Q &&
-                          !Z,
-                        showPlayNext: J,
-                        videoA: C,
-                        videoB: T,
-                        autoplaySeconds: R,
-                        autoplayCancelled: D,
-                        onClose: () => Jt(!1),
-                        onPlay: () => {
-                          P.current?.play(),
-                          Jt(!1)
-                        },
-                        onNextVideo: () => {
-                          Qe(),
-                          Jt(!1)
-                        },
-                        cancelPlayNext: z
-                      }
-                    )
+                    ' ',
+                    'and enjoy watching videos offline anytime!'
                   )
+                ),
+                _ &&
+                !kt &&
+                Y.createElement(
+                  'div',
+                  {
+                    className: 'ds-video-section__offline'
+                  },
+                  Y.createElement(
+                    'p',
+                    {
+                      className: 'ds-video-section__offline-title'
+                    },
+                    'Offline mode'
+                  ),
+                  Y.createElement(
+                    'p',
+                    {
+                      className: 'ds-video-section__offline-label'
+                    },
+                    'You can watch this video offline by installing the app.'
+                  )
+                ),
+                !_ &&
+                Y.createElement(
+                  Y.Fragment,
+                  null,
+                  Y.createElement(
+                    'div',
+                    {
+                      className: 'ds-video-section__default'
+                    },
+                    Go &&
+                    Y.createElement(
+                      'img',
+                      {
+                        className: 'ds-video-section__default-image',
+                        src: Go,
+                        alt: 'thumbnail',
+                        'data-testid': 'video-thumbnail'
+                      }
+                    ),
+                    !N &&
+                    Y.createElement(iC, null)
+                  ),
+                  D &&
+                  Y.createElement(
+                    Y.Fragment,
+                    null,
+                    K === 'youtube' &&
+                    Y.createElement(
+                      wN,
+                      {
+                        ref: v,
+                        video: N,
+                        onState: xe,
+                        'data-testid': 'video-youtube-player'
+                      }
+                    ),
+                    K === 'bunny' &&
+                    $ &&
+                    $.length > 0 &&
+                    Y.createElement(
+                      pU,
+                      {
+                        ref: v,
+                        video: N,
+                        displayType: b,
+                        manifest: ae,
+                        onState: xe,
+                        onNext: Se,
+                        'data-testid': 'video-shaka-player'
+                      }
+                    )
+                  ),
+                  Y.createElement(
+                    UL,
+                    {
+                      show: re,
+                      loginCallback: () => {
+                        Oe(!0),
+                        ue(!1),
+                        Te(!0),
+                        $e({
+                          type: 'SIGN_IN',
+                          payload: {
+                            isClosable: !1,
+                            message: 'Log in to watch this private video.'
+                          }
+                        })
+                      },
+                      unlockNowCallback: () => {
+                        Oe(!0),
+                        ue(!1),
+                        gt.push(Vo({
+                          path: ZI,
+                          language: z
+                        }))
+                      }
+                    }
+                  ),
+                  Y.createElement(OL, {
+                    show: he,
+                    continueCallback: () => {
+                      Oe(!0),
+                      qe(!1)
+                    }
+                  }),
+                  Y.createElement(
+                    jL,
+                    {
+                      show: L &&
+                      !re &&
+                      !he,
+                      showPlayNext: W,
+                      videoA: fe,
+                      videoB: m,
+                      autoplaySeconds: ie,
+                      autoplayCancelled: Q,
+                      onClose: () => Ke(!1),
+                      onPlay: () => {
+                        v.current?.play(),
+                        Ke(!1)
+                      },
+                      onNextVideo: () => {
+                        Se(),
+                        Ke(!1)
+                      },
+                      cancelPlayNext: A
+                    }
+                  )
+                )
               )
             ),
-            (!m || !p) &&
-              !y &&
-              !ne &&
-              reactExports.createElement(
-                'div',
-                {
-                  className: 'ds-page__spinner'
-                },
-                reactExports.createElement(Spinner, null)
-              ),
-            m &&
-              p &&
-              reactExports.createElement(
-                'div',
-                {
-                  className: `ds-video-section__information
-                    
-                  ${ K ||
-                    ne ? 'ds-video-section__information--hidden' : '' }
-                  
-                  `
-                },
-                renderTitle(p, Tr.data, gr.data, Ur, ir, Vt, yi),
-                renderDescription(p.description),
-                reactExports.createElement(
-                  'div',
-                  {
-                    className: 'ds-video-section__badges',
-                    'data-testid': 'video-badges'
-                  },
-                  renderLevel(dr, p.level, l),
-                  reactExports.createElement(VideoDifficultyBadge, { difficultyScore: p.difficultyScore }),
-                  renderPremium(p.private),
-                  renderCountries(dr, p.guides, qt.data?.guidesDictionary, l),
-                  renderGuides(dr, p.guides, l),
-                  renderTags(dr, p.tags, l)
-                ),
-                renderPublishedOn(p.publishedAt),
-                renderSeriesRelated(Mr, p._id, l),
-                renderCommentsMobileButton({
-                  isOnline: Ar,
-                  videoId: p._id,
-                  language: l
-                })
-              ),
-            y &&
-              reactExports.createElement(
-                'div',
-                {
-                  className: `ds-video-section__information
-                    
-                  ${ ne ? 'ds-video-section__information--toggle' : '' }
-                  
-                  `
-                },
-                renderTitle(y, Tr.data, gr.data, Ur, ir, Vt, yi),
-                reactExports.createElement(
-                  'div',
-                  {
-                    className: 'ds-video-section__badges'
-                  },
-                  renderLevel(dr, y.level, l),
-                  renderPremium(y.private),
-                  renderCountries(dr, y.guides, qt.data?.guidesDictionary, l),
-                  renderGuides(dr, y.guides, l),
-                  renderTags(dr, y.tags, l)
-                ),
-                renderPublishedOn(y.publishedAt),
-                p &&
-                  renderCommentsMobileButton({
-                    isOnline: Ar,
-                    videoId: p._id,
-                    language: l
-                  })
-              )
-          )
-        )
-      ),
-      !ne &&
-        reactExports.createElement(
-          Card,
-          {
-            className: 'ds-card ds-video-section__card-comments',
-            'data-testid': 'video-comments-card'
-          },
-          reactExports.createElement(
-            Card.Body,
-            {
-              className: 'ds-card__body ds-video-section__card-comments-body'
-            },
-            reactExports.createElement(
+            (!ne || !N) &&
+            !_ &&
+            !Pe &&
+            Y.createElement(
               'div',
               {
-                className: `
-                ds-card__content ds-video-section__card-comments-content
+                className: 'ds-page__spinner'
+              },
+              Y.createElement(iC, null)
+            ),
+            ne &&
+            N &&
+            Y.createElement(
+              'div',
+              {
+                className: `ds-video-section__information
+                    
+                ${ H ||
+                Pe ? 'ds-video-section__information--hidden' : '' }
                   
-                ${ K ? 'ds-video-section__card-comments-content--show' : '' }
-                
                 `
               },
-              reactExports.createElement(
+              _R(N, pt.data, ht.data, ze, Ee, Ge, oo),
+              xU(N.description),
+              Y.createElement(
                 'div',
                 {
-                  className: 'ds-video-section__card-comments-header',
-                  onClick: () => {
-                    Qt(!K && Ar),
-                    an(void 0)
-                  },
-                  'data-testid': 'video-comments-button'
+                  className: 'ds-video-section__badges',
+                  'data-testid': 'video-badges'
                 },
-                reactExports.createElement(
-                  'div',
-                  {
-                    className: 'ds-video-section__card-comments-header-left'
-                  },
-                  reactExports.createElement(
-                    IconMoon,
-                    {
-                      className: 'ds-video-section__card-comments-header-icon',
-                      icon: 'line-comments'
-                    }
-                  ),
-                  reactExports.createElement(
-                    'div',
-                    {
-                      className: 'ds-video-section__card-comments-header-title'
-                    },
-                    K &&
-                      Yr ? reactExports.createElement('span', null, Yr) : reactExports.createElement('span', null, 'View comments'),
-                    !Ar &&
-                      reactExports.createElement(OfflineModeMessage, null)
-                  )
-                ),
-                reactExports.createElement(
-                  'div',
-                  {
-                    className: 'ds-video-section__card-comments-header-right'
-                  },
-                  (K || Ar) &&
-                    reactExports.createElement(
-                      IconMoon,
-                      {
-                        className: 'ds-video-section__card-comments-header-toggle-icon ds-video-section__card-comments-header-toggle-icon--up',
-                        icon: 'thick-arrow-up'
-                      }
-                    ),
-                  reactExports.createElement(
-                    IconMoon,
-                    {
-                      className: `
-                      ds-video-section__card-comments-header-toggle-icon ds-video-section__card-comments-header-toggle-icon--down
-                        
-                      ${ K ? 'ds-video-section__card-comments-header-toggle-icon--toggle' : '' }
-                      
-                      `,
-                      icon: 'thick-arrow-down'
-                    }
-                  )
-                )
+                DR(pn, N.level, z),
+                Y.createElement(VideoDifficultyBadge, { difficultyScore: N.difficultyScore }),
+                PR(N.private),
+                RR(pn, N.guides, U.data?.guidesDictionary, z),
+                bR(pn, N.guides, z),
+                LR(pn, N.tags, z)
               ),
-              p &&
-                K &&
-                reactExports.createElement(
-                  'div',
-                  {
-                    className: 'ds-video-section__card-comments-collapsable',
-                    'data-testid': 'video-comments-content'
-                  },
-                  reactExports.createElement(
-                    Comments,
-                    {
-                      identifier: p._id,
-                      page: 'Watch',
-                      title: p.title,
-                      url: window.location.href,
-                      videoLanguage: p.language,
-                      onCommentsCountChange: Hn => {
-                        an(Hn)
-                      }
-                    }
-                  )
-                )
+              NR(N.publishedAt),
+              wU(Re, N._id, z),
+              UR({
+                isOnline: En,
+                videoId: N._id,
+                language: z
+              })
+            ),
+            _ &&
+            Y.createElement(
+              'div',
+              {
+                className: `ds-video-section__information
+                    
+                ${ Pe ? 'ds-video-section__information--toggle' : '' }
+                  
+                `
+              },
+              _R(_, pt.data, ht.data, ze, Ee, Ge, oo),
+              Y.createElement(
+                'div',
+                {
+                  className: 'ds-video-section__badges'
+                },
+                DR(pn, _.level, z),
+                PR(_.private),
+                RR(pn, _.guides, U.data?.guidesDictionary, z),
+                bR(pn, _.guides, z),
+                LR(pn, _.tags, z)
+              ),
+              NR(_.publishedAt),
+              N &&
+              UR({
+                isOnline: En,
+                videoId: N._id,
+                language: z
+              })
             )
           )
         )
+      ),
+      !Pe &&
+      Y.createElement(
+        Xg,
+        {
+          className: 'ds-card ds-video-section__card-comments',
+          'data-testid': 'video-comments-card'
+        },
+        Y.createElement(
+          Xg.Body,
+          {
+            className: 'ds-card__body ds-video-section__card-comments-body'
+          },
+          Y.createElement(
+            'div',
+            {
+              className: `
+                  ds-card__content ds-video-section__card-comments-content
+                  
+              ${ H ? 'ds-video-section__card-comments-content--show' : '' }
+                
+              `
+            },
+            Y.createElement(
+              'div',
+              {
+                className: 'ds-video-section__card-comments-header',
+                onClick: () => {
+                  ce(!H && En),
+                  an(void 0)
+                },
+                'data-testid': 'video-comments-button'
+              },
+              Y.createElement(
+                'div',
+                {
+                  className: 'ds-video-section__card-comments-header-left'
+                },
+                Y.createElement(
+                  gs,
+                  {
+                    className: 'ds-video-section__card-comments-header-icon',
+                    icon: 'line-comments'
+                  }
+                ),
+                Y.createElement(
+                  'div',
+                  {
+                    className: 'ds-video-section__card-comments-header-title'
+                  },
+                  H &&
+                  Gt ? Y.createElement('span', null, Gt) : Y.createElement('span', null, 'View comments'),
+                  !En &&
+                  Y.createElement(iL, null)
+                )
+              ),
+              Y.createElement(
+                'div',
+                {
+                  className: 'ds-video-section__card-comments-header-right'
+                },
+                (H || En) &&
+                Y.createElement(
+                  gs,
+                  {
+                    className: 'ds-video-section__card-comments-header-toggle-icon ds-video-section__card-comments-header-toggle-icon--up',
+                    icon: 'thick-arrow-up'
+                  }
+                ),
+                Y.createElement(
+                  gs,
+                  {
+                    className: `
+                        ds-video-section__card-comments-header-toggle-icon ds-video-section__card-comments-header-toggle-icon--down
+                        
+                    ${ H ? 'ds-video-section__card-comments-header-toggle-icon--toggle' : '' }
+                      
+                    `,
+                    icon: 'thick-arrow-down'
+                  }
+                )
+              )
+            ),
+            N &&
+            H &&
+            Y.createElement(
+              'div',
+              {
+                className: 'ds-video-section__card-comments-collapsable',
+                'data-testid': 'video-comments-content'
+              },
+              Y.createElement(
+                rL,
+                {
+                  identifier: N._id,
+                  page: 'Watch',
+                  title: N.title,
+                  url: window.location.href,
+                  videoLanguage: N.language,
+                  onCommentsCountChange: zn => {
+                    an(zn)
+                  }
+                }
+              )
+            )
+          )
+        )
+      )
     ),
-    reactExports.createElement(
-      ShareModal,
+    Y.createElement(
+      sL,
       {
-        show: Vr,
-        videoUrl: di,
-        videoTitle: p?.title,
-        closeCallback: () => Zr(!1)
+        show: Gn,
+        videoUrl: Br,
+        videoTitle: N?.title,
+        closeCallback: () => hn(!1)
       }
     )
   )

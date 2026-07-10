@@ -1,49 +1,49 @@
-SeriesModal = (u) => {
+SeriesModal = (n) => {
   const {
-    show: l,
-    series: p,
-    seriesDataItem: m,
-    closeCallback: y
+    show: s,
+    series: l,
+    seriesDataItem: u,
+    closeCallback: p
   }
-    = u,
+    = n,
     {
-      getColor: b
+      getColor: m
     }
       = useColorMode(),
-    C = b({
+    g = m({
       light: 0,
       dark: 100
     }),
     {
-      language: T,
-      languageName: R
+      language: y,
+      languageName: x
     }
       = useLanguage(),
-    D = useUserState(),
-    N = useGetAllPlaylist({
-      language: T
+    E = useUserState(),
+    S = useGetAllPlaylist({
+      language: y
     }),
-    F = useGetAllWatchedVideos({
-      language: T
+    T = useGetAllWatchedVideos({
+      language: y
     }),
-    O = useAddToPlaylist(),
-    q = useDeleteFromPlaylist({
-      language: T
+    k = useAddToPlaylist(),
+    R = useDeleteFromPlaylist({
+      language: y
     }),
     [
       P,
-      G
+      M
     ] = reactExports.useState(!1),
     [
-      J,
-      $
+      B,
+      I
     ] = reactExports.useState(!1),
-    K = reactExports.useCallback(
-      ir => {
-        O.mutate({
-          seriesId: ir._id,
+    F = reactExports.useCallback(
+      ne => {
+        k.mutate({
+          seriesId: ne._id,
           addedDate: new Date,
-          language: T
+          language: y
         }),
         actionToast$.next({
           type: 'success',
@@ -51,70 +51,68 @@ SeriesModal = (u) => {
         })
       },
       [
-        O,
-        T
+        k,
+        y
       ]
     ),
-    Q = reactExports.useCallback(
-      ir => {
-        q.mutate(ir),
+    N = reactExports.useCallback(
+      ne => {
+        R.mutate(ne),
         actionToast$.next({
           type: 'error',
           content: 'Removed from my list.'
         })
       },
       [
-        q
+        R
       ]
     );
   reactExports.useEffect(() => {
-    l ? G(!0) : (G(!1), $(!1))
+    s ? M(!0) : (M(!1), I(!1))
   }, [
-    l
+    s
   ]),
     reactExports.useEffect(
       () => {
-        if (J) {
-          const ir = setTimeout(() => y(), 200);
-          return () => clearTimeout(ir)
+        if (B) {
+          const ne = setTimeout(() => p(), 200);
+          return () => clearTimeout(ne)
         }
       },
       [
-        J,
-        y
+        B,
+        p
       ]
     );
-  const Z = N.data?.find(ir => ir.seriesId === p._id),
-    ne = !Z,
-    oe = !!Z;
-  let Qe = 0,
-    zt = 0,
-    Jt = m.episodes.slice(),
-    z = 0;
-  Jt.forEach(
-    ir => {
-      if (Qe += ir.duration - (ir.endCutout ?? 0), !F.data) return;
-      const Vt = F.data[ir._id];
-      Vt &&
-        (
-          zt += Vt.watched ? ir.duration - (ir.endCutout ?? 0) : Vt.watchPosition
-        )
+  const O = S.data?.find(ne => ne.seriesId === l._id),
+    $ = !O,
+    U = !!O;
+  let G = 0,
+    H = 0,
+    j = u.episodes.slice(),
+    Y = 0;
+  j.forEach(
+    ne => {
+      if (G += ne.duration - (ne.endCutout ?? 0), !T.data) return;
+      const V = T.data[ne._id];
+      V &&
+        (H += V.watched ? ne.duration - (ne.endCutout ?? 0) : V.watchPosition)
     }
   );
-  const Qt = Jt.length;
-  p.numberOfEpisodes > Qt &&
-    (z = p.numberOfEpisodes - Qt);
-  const er = percentage(100, zt / Qe * 100, !0),
-    cr = reactExports.createElement(
+  const X = j.length;
+  l.numberOfEpisodes > X &&
+    (Y = l.numberOfEpisodes - X);
+  const J = percentage(100, H / G * 100, !0),
+    te = reactExports.createElement(
       reactExports.Fragment,
       null,
       reactExports.createElement(
         SeriesArtwork,
         {
           type: 'lazy',
-          series: p,
+          series: l,
           kind: 'cover',
-          alt: p.title,
+          alt: l.title,
           className: 'ds-series-modal__cover'
         }
       ),
@@ -128,16 +126,16 @@ SeriesModal = (u) => {
         },
         reactExports.createElement('h1', {
           className: 'ds-series-modal__title'
-        }, p.title),
+        }, l.title),
         reactExports.createElement(
           'div',
           {
             className: 'ds-series-modal__information'
           },
           reactExports.createElement(LevelBadge, {
-            level: p.level
+            level: l.level
           }),
-          reactExports.createElement(SeriesDifficultyBadge, { episodes: m.episodes }),
+          reactExports.createElement(SeriesDifficultyBadge, { episodes: u.episodes }),
           reactExports.createElement(
             IconMoon,
             {
@@ -150,9 +148,9 @@ SeriesModal = (u) => {
             {
               className: 'ds-series-modal__information-label'
             },
-            Jt.length,
+            j.length,
             ' Episode(s) • ',
-            secondsToHM(m.duration)
+            secondsToHM(u.duration)
           )
         ),
         reactExports.createElement(
@@ -165,7 +163,7 @@ SeriesModal = (u) => {
             {
               className: 'ds-series-modal__doughnut-progress'
             },
-            er,
+            J,
             '%',
             reactExports.createElement(
               'small',
@@ -178,9 +176,9 @@ SeriesModal = (u) => {
           reactExports.createElement(
             DoughnutChart,
             {
-              progress: er,
-              backgroundColor: alpha(C, 0.2),
-              progressColor: C
+              progress: J,
+              backgroundColor: alpha(g, 0.2),
+              progressColor: g
             }
           )
         ),
@@ -194,9 +192,9 @@ SeriesModal = (u) => {
             {
               to: getUrl({
                 path: WATCH,
-                language: T,
+                language: y,
                 params: {
-                  series: p._id
+                  series: l._id
                 }
               }),
               className: 'btn ds-button ds-button--lg ds-button--primary'
@@ -210,13 +208,13 @@ SeriesModal = (u) => {
             ),
             'Play'
           ),
-          ne &&
+          $ &&
             reactExports.createElement(
               'button',
               {
                 type: 'button',
                 className: 'btn ds-button ds-button--lg ds-button--white',
-                onClick: () => K(p)
+                onClick: () => F(l)
               },
               reactExports.createElement(
                 IconMoon,
@@ -228,14 +226,13 @@ SeriesModal = (u) => {
               ),
               'Add to my list'
             ),
-          oe &&
+          U &&
             reactExports.createElement(
               'button',
               {
                 type: 'button',
                 className: 'btn ds-button ds-button--lg ds-button--white',
-                onClick: () => Z &&
-                  Q(Z)
+                onClick: () => N(O)
               },
               reactExports.createElement(
                 IconMoon,
@@ -249,7 +246,7 @@ SeriesModal = (u) => {
         )
       )
     ),
-    sr = reactExports.createElement(
+    $t = reactExports.createElement(
       reactExports.Fragment,
       null,
       reactExports.createElement(
@@ -262,64 +259,64 @@ SeriesModal = (u) => {
           {
             className: 'ds-series-modal__progress-label'
           },
-          er,
+          J,
           '% watched'
         ),
         reactExports.createElement(
           ProgressBar$1,
           {
             className: 'ds-progress-bar ds-progress-bar--secondary',
-            now: er
+            now: J
           }
         )
       ),
       reactExports.createElement('p', {
         className: 'ds-series-modal__description'
-      }, p.description),
+      }, l.description),
       reactExports.createElement(
         'div',
         {
           className: 'ds-series-modal__grid'
         },
-        Jt.map(
-          ir => !D.data ||
-            !F.data ||
-            !N.data ? reactExports.createElement('div', {
-              key: ir._id
+        j.map(
+          ne => !E.data ||
+            !T.data ||
+            !S.data ? reactExports.createElement('div', {
+              key: ne._id
           }) : reactExports.createElement(
             'div',
             {
-              key: ir._id,
+              key: ne._id,
               className: 'ds-series-modal__video'
             },
             reactExports.createElement(
               Link,
               {
-                to: buildLinkTo$1(p, ir)
+                to: buildLinkTo(l, ne)
               },
               reactExports.createElement(
                 EpisodeCard,
                 {
-                  video: ir,
-                  userState: D.data,
-                  watchedVideos: F.data,
-                  playlistItems: N.data,
+                  video: ne,
+                  userState: E.data,
+                  watchedVideos: T.data,
+                  playlistItems: S.data,
                   showDifficulty: !1
                 }
               )
             )
           )
         ),
-        lodashExports.times(z).map(
-          ir => reactExports.createElement(
+        lodashExports.times(Y).map(
+          ne => reactExports.createElement(
             'div',
             {
-              key: ir,
+              key: ne,
               className: 'ds-series-modal__video'
             },
             reactExports.createElement(ComingSoonCard, {
-              episodeNumber: ir + 1 + Jt.length,
-              series: p
+              episodeNumber: ne + 1 + j.length,
+              series: l
             })
           )
         )
@@ -328,65 +325,41 @@ SeriesModal = (u) => {
   return reactExports.createElement(
     reactExports.Fragment,
     null,
-    l &&
+    s &&
       reactExports.createElement(
-        HelmetExport,
-        null,
-        reactExports.createElement('title', null, p.title),
-        reactExports.createElement('meta', {
-          name: 'description',
-          content: p.description
-        }),
-        reactExports.createElement(
-          'meta',
-          {
-            property: 'og:url',
-            content: `https://app.dreaming.com/${ R.toLowerCase() }/series?id=${ p._id }`
-          }
-        ),
-        reactExports.createElement('meta', {
-          property: 'og:title',
-          content: p.title
-        }),
-        reactExports.createElement('meta', {
-          property: 'og:description',
-          content: p.description
-        }),
-        reactExports.createElement(
-          'meta',
-          {
-            property: 'og:image',
-            content: getSeriesArtworkUrl(p._id, 'horizontal')
-          }
-        ),
-        reactExports.createElement(
-          'link',
-          {
-            rel: 'canonical',
-            href: `https://app.dreaming.com/${ R.toLowerCase() }/series?id=${ p._id }`
-          }
-        )
+        PageMeta,
+        {
+          title: l.title,
+          description: l.description,
+          ogUrl: `https://app.dreaming.com/${ x.toLowerCase() }/series?id=${ l._id }`,
+          ogTitle: l.title,
+          ogDescription: l.description,
+          ogImage: getSeriesArtworkUrl(l._id, 'horizontal'),
+          ogSiteName: 'Dreaming: Language Learning',
+          ogType: 'website',
+          canonical: `https://app.dreaming.com/${ x.toLowerCase() }/series?id=${ l._id }`
+        }
       ),
     reactExports.createElement(
       Modal,
       {
         className: 'ds-modal ds-series-modal',
         backdropClassName: 'ds-series-modal--backdrop',
-        show: l,
-        onHide: () => y()
+        show: s,
+        onHide: () => p()
       },
       reactExports.createElement(
         Modal.Header,
         {
           className: 'ds-modal__header'
         },
-        cr,
+        te,
         reactExports.createElement(
           'button',
           {
             type: 'button',
             className: 'ds-modal__close-button',
-            onClick: () => y(),
+            onClick: () => p(),
             'aria-label': 'Close modal'
           },
           reactExports.createElement(
@@ -400,9 +373,9 @@ SeriesModal = (u) => {
       ),
       reactExports.createElement(Modal.Body, {
         className: 'ds-modal__body'
-      }, sr)
+      }, $t)
     ),
-    l &&
+    s &&
       reactExports.createElement(
         'div',
         {
@@ -410,7 +383,7 @@ SeriesModal = (u) => {
             
           ${ P ? ' ds-fade-in-right' : '' }
             
-          ${ J ? ' ds-fade-out-right' : '' }
+          ${ B ? ' ds-fade-out-right' : '' }
           
           `,
           role: 'dialog',
@@ -421,13 +394,13 @@ SeriesModal = (u) => {
           {
             className: 'ds-series-modal__header'
           },
-          cr,
+          te,
           reactExports.createElement(
             'button',
             {
               type: 'button',
               className: 'ds-series-modal__close-button',
-              onClick: () => $(!0),
+              onClick: () => I(!0),
               'aria-label': 'Close modal'
             },
             reactExports.createElement(
@@ -441,7 +414,7 @@ SeriesModal = (u) => {
         ),
         reactExports.createElement('div', {
           className: 'ds-series-modal__body'
-        }, sr)
+        }, $t)
       )
   )
 };
