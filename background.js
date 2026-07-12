@@ -64,12 +64,12 @@ function makeListener(replacementFileNames) {
 
 browser.webRequest.onBeforeRequest.addListener(
   makeListener(indexReplacementFileNames),
-  {urls: ["https://app.dreaming.com/assets/index*.js"], types: ["script"]},
+  {urls: ["https://app.dreaming.com/assets/index-qlEw_rQr.js"], types: ["script"]},
   ["blocking"]
 );
 
 browser.webRequest.onBeforeRequest.addListener(
   makeListener(watchPageReplacementFileNames),
-  {urls: ["https://app.dreaming.com/assets/WatchPage*.js"], types: ["script"]},
+  {urls: ["https://app.dreaming.com/assets/WatchPage-DjPaV3DI.js"], types: ["script"]},
   ["blocking"]
 );

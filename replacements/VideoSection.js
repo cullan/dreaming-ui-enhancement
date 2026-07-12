@@ -1,4 +1,4 @@
-import { VideoDifficultyBadge } from'./index-B8n8Etgv.js';
+import { VideoDifficultyBadge } from './index-qlEw_rQr.js';
 
 TU = (le) => {
   const {
