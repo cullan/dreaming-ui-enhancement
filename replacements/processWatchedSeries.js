@@ -1,41 +1,41 @@
-processWatchedSeries = (u, l, p) => {
-  return u.filter(
-    m => l[m._id]?.episodes.some(
-      y => {
-        const b = p[y._id];
-        return b &&
-          b.watchPosition > (y.duration - (y.endCutout ?? 0)) / 2
+cBe = (r, n, i) => {
+  return r.filter(
+    a => n[a._id]?.episodes.some(
+      l => {
+        const c = i[l._id];
+        return c &&
+          c.watchPosition > (l.duration - (l.endCutout ?? 0)) / 2
       }
-    ) && !l[m._id]?.episodes.every(
+    ) && !n[a._id]?.episodes.every(
       e => {
-        const b = p[e._id];
+        const b = i[e._id];
         return b && b.watched;
       }
     )
   ).map(
-    m => {
-      const y = l[m._id];
-      return y &&
+    a => {
+      const l = n[a._id];
+      return l &&
         (
-          y.lastWatched = void 0,
-          y.episodes.forEach(
-            b => {
-              const C = p[b._id];
-              if (C) {
-                const T = C.lastWatched;
-                (!y.lastWatched || T > y.lastWatched) &&
-                  (y.lastWatched = T)
+          l.lastWatched = void 0,
+            l.episodes.forEach(
+              c => {
+                const p = i[c._id];
+                if (p) {
+                  const d = p.lastWatched;
+                  (!l.lastWatched || d > l.lastWatched) &&
+                    (l.lastWatched = d)
               }
             }
           )
         ),
-        m
+        a
     }
   ).sort(
-    (m, y) => {
-      const b = l[m._id]?.lastWatched?.getTime() ?? Number.MIN_SAFE_INTEGER,
-        C = l[y._id]?.lastWatched?.getTime() ?? Number.MIN_SAFE_INTEGER;
-      return b > C ? - 1 : b < C ? 1 : 0
+    (a, l) => {
+      const c = n[a._id]?.lastWatched?.getTime() ?? Number.MIN_SAFE_INTEGER,
+        p = n[l._id]?.lastWatched?.getTime() ?? Number.MIN_SAFE_INTEGER;
+      return c > p ? - 1 : c < p ? 1 : 0
     }
-  ).slice(0, Math.min(u.length, MAXIMUM_NUMBER_OF_SERIES))
+  ).slice(0, Math.min(r.length, oBe))
 };
