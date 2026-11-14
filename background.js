@@ -16,8 +16,8 @@ const indexReplacementFileNames = [
   // edited components
   'replacements/CardFooter.js',
   'replacements/SeriesCard.js', // series cards on series pages (Series -> level)
-  // 'replacements/SeriesCarousel.js', // large series carousel on top of series page
-  // 'replacements/SeriesModal.js', // series detail page
+  'replacements/SeriesCarousel.js', // large series carousel on top of series page
+  'replacements/SeriesModal.js', // series detail page
   'replacements/VideoThumbnail.js', // video thumbnails with overlay
 ];
 

@@ -1,420 +1,406 @@
-SeriesModal = (n) => {
+_7 = (r) => {
   const {
-    show: s,
-    series: l,
-    seriesDataItem: u,
-    closeCallback: p
+    show: n,
+    series: i,
+    seriesDataItem: a,
+    closeCallback: l
   }
-    = n,
-    {
-      getColor: m
-    }
-      = useColorMode(),
-    g = m({
-      light: 0,
-      dark: 100
-    }),
-    {
-      language: y,
-      languageName: x
-    }
-      = useLanguage(),
-    E = useUserState(),
-    S = useGetAllPlaylist({
-      language: y
-    }),
-    T = useGetAllWatchedVideos({
-      language: y
-    }),
-    k = useAddToPlaylist(),
-    R = useDeleteFromPlaylist({
-      language: y
-    }),
-    [
-      P,
-      M
-    ] = reactExports.useState(!1),
-    [
-      B,
-      I
-    ] = reactExports.useState(!1),
-    F = reactExports.useCallback(
-      ne => {
-        k.mutate({
-          seriesId: ne._id,
-          addedDate: new Date,
-          language: y
-        }),
-        actionToast$.next({
-          type: 'success',
-          content: 'Added to my list.'
-        })
-      },
+    = r,
+      {
+        getColor: c
+      }
+        = jv(),
+      p = c({
+        light: 1,
+        dark: 100
+      }),
+      {
+        language: d,
+        languageName: g
+      }
+        = Nr(),
+      {
+        walled: y
+      }
+        = sp(),
+      {
+        withAccount: b
+      }
+        = m8(),
+      S = ip(al('sm'));
+  ZF(n && S);
+  const T = Gi(),
+      D = gT({
+        language: d
+      }),
+      P = F0({
+        language: d
+      }),
+      j = Dre(),
+      Y = Nre({
+        language: d
+      }),
       [
-        k,
-        y
-      ]
-    ),
-    N = reactExports.useCallback(
-      ne => {
-        R.mutate(ne),
-        actionToast$.next({
-          type: 'error',
-          content: 'Removed from my list.'
-        })
-      },
+        G,
+        K
+      ] = h.useState(!1),
       [
-        R
-      ]
-    );
-  reactExports.useEffect(() => {
-    s ? M(!0) : (M(!1), I(!1))
+        z,
+        ee
+      ] = h.useState(!1),
+      F = h.useCallback(
+        De => {
+          j.mutate({
+            seriesId: De._id,
+            addedDate: new Date,
+            language: d
+          }),
+          li.next({
+            type: 'success',
+            content: 'Added to my list.'
+          })
+        },
+        [
+          j,
+          d
+        ]
+      ),
+      $ = h.useCallback(
+        De => {
+          Y.mutate(De),
+          li.next({
+            type: 'error',
+            content: 'Removed from my list.'
+          })
+        },
+        [
+          Y
+        ]
+      );
+  h.useEffect(() => {
+    n ? K(!0) : (K(!1), ee(!1))
   }, [
-    s
+    n
   ]),
-    reactExports.useEffect(
-      () => {
-        if (B) {
-          const ne = setTimeout(() => p(), 200);
-          return () => clearTimeout(ne)
-        }
-      },
-      [
-        B,
-        p
-      ]
-    );
-  const O = S.data?.find(ne => ne.seriesId === l._id),
-    $ = !O,
-    U = !!O;
-  let G = 0,
-    H = 0,
-    j = u.episodes.slice(),
-    Y = 0;
-  j.forEach(
-    ne => {
-      if (G += ne.duration - (ne.endCutout ?? 0), !T.data) return;
-      const V = T.data[ne._id];
-      V &&
-        (H += V.watched ? ne.duration - (ne.endCutout ?? 0) : V.watchPosition)
+      h.useEffect(
+        () => {
+          if (z) {
+            const De = setTimeout(() => l(), 200);
+            return () => clearTimeout(De)
+          }
+        },
+        [
+          z,
+          l
+        ]
+      );
+  const C = D.data?.find(De => De.seriesId === i._id),
+      ne = !C,
+      fe = !!C;
+  let re = 0,
+      q = 0;
+  const ce = a.episodes.slice();
+  let ue = 0;
+  ce.forEach(
+    De => {
+      if (re += De.duration - (De.endCutout ?? 0), !P.data) return;
+      const ke = P.data[De._id];
+      ke &&
+        (q += ke.watched ? De.duration - (De.endCutout ?? 0) : ke.watchPosition)
     }
   );
-  const X = j.length;
-  l.numberOfEpisodes > X &&
-    (Y = l.numberOfEpisodes - X);
-  const J = percentage(100, H / G * 100, !0),
-    te = reactExports.createElement(
-      reactExports.Fragment,
-      null,
-      reactExports.createElement(
-        SeriesArtwork,
-        {
-          type: 'lazy',
-          series: l,
-          kind: 'cover',
-          alt: l.title,
-          className: 'ds-series-modal__cover'
-        }
-      ),
-      reactExports.createElement('div', {
-        className: 'ds-series-modal__overlay'
-      }),
-      reactExports.createElement(
-        'div',
-        {
-          className: 'ds-series-modal__caption'
-        },
-        reactExports.createElement('h1', {
-          className: 'ds-series-modal__title'
-        }, l.title),
-        reactExports.createElement(
-          'div',
+  const me = ce.length;
+  i.numberOfEpisodes > me &&
+    (ue = i.numberOfEpisodes - me);
+  const de = f8(100, q / re * 100, !0),
+      Te = h.createElement(
+        h.Fragment,
+        null,
+        h.createElement(
+          w7,
           {
-            className: 'ds-series-modal__information'
-          },
-          reactExports.createElement(LevelBadge, {
-            level: l.level
-          }),
-          reactExports.createElement(SeriesDifficultyBadge, { episodes: u.episodes }),
-          reactExports.createElement(
-            IconMoon,
-            {
-              className: 'ds-series-modal__information-icon',
-              icon: 'thick-time'
-            }
-          ),
-          reactExports.createElement(
-            'p',
-            {
-              className: 'ds-series-modal__information-label'
-            },
-            j.length,
-            ' Episode(s) • ',
-            secondsToHM(u.duration)
-          )
+            type: 'lazy',
+            series: i,
+            kind: 'cover',
+            alt: i.title,
+            className: 'ds-series-modal__cover'
+          }
         ),
-        reactExports.createElement(
+        h.createElement('div', {
+          className: 'ds-series-modal__overlay'
+        }),
+        h.createElement(
           'div',
           {
-            className: 'ds-series-modal__doughnut'
+            className: 'ds-series-modal__caption'
           },
-          reactExports.createElement(
-            'p',
+          h.createElement(Js, {
+            as: 'h1',
+            className: 'ds-series-modal__title'
+          }, i.title),
+          h.createElement(
+            'div',
             {
-              className: 'ds-series-modal__doughnut-progress'
+              className: 'ds-series-modal__information'
             },
-            J,
-            '%',
-            reactExports.createElement(
-              'small',
+            h.createElement(wB, {
+              level: i.level
+            }),
+            reactExports.createElement(SeriesDifficultyBadge, { episodes: a.episodes }),
+            h.createElement(
+              un,
               {
-                className: 'ds-series-modal__doughnut-label'
-              },
-              'watched'
-            )
-          ),
-          reactExports.createElement(
-            DoughnutChart,
-            {
-              progress: J,
-              backgroundColor: alpha(g, 0.2),
-              progressColor: g
-            }
-          )
-        ),
-        reactExports.createElement(
-          'div',
-          {
-            className: 'ds-series-modal__buttons'
-          },
-          reactExports.createElement(
-            Link,
-            {
-              to: getUrl({
-                path: WATCH,
-                language: y,
-                params: {
-                  series: l._id
-                }
-              }),
-              className: 'btn ds-button ds-button--lg ds-button--primary'
-            },
-            reactExports.createElement(
-              IconMoon,
-              {
-                className: 'ds-button__icon ds-button__icon--left',
-                icon: 'thick-play'
+                className: 'ds-series-modal__information-icon',
+                icon: 'thick-time'
               }
             ),
-            'Play'
+            h.createElement(
+              'p',
+              {
+                className: 'ds-series-modal__information-label'
+              },
+              ce.length,
+              ' Episode(s) • ',
+              uT(a.duration)
+            )
           ),
-          $ &&
-            reactExports.createElement(
-              'button',
-              {
-                type: 'button',
-                className: 'btn ds-button ds-button--lg ds-button--white',
-                onClick: () => F(l)
-              },
-              reactExports.createElement(
-                IconMoon,
-                {
-                  className: 'ds-button__icon ds-button__icon--left ds-button__icon--lg ds-button__icon--success',
-                  icon: 'thick-add-playlist',
-                  'aria-hidden': 'true'
-                }
-              ),
-              'Add to my list'
-            ),
-          U &&
-            reactExports.createElement(
-              'button',
-              {
-                type: 'button',
-                className: 'btn ds-button ds-button--lg ds-button--white',
-                onClick: () => N(O)
-              },
-              reactExports.createElement(
-                IconMoon,
-                {
-                  className: 'ds-button__icon ds-button__icon--left ds-button__icon--lg ds-button__icon--error',
-                  icon: 'thick-remove-playlist'
-                }
-              ),
-              'Remove from my list'
-            )
-        )
-      )
-    ),
-    $t = reactExports.createElement(
-      reactExports.Fragment,
-      null,
-      reactExports.createElement(
-        'div',
-        {
-          className: 'ds-series-modal__progress'
-        },
-        reactExports.createElement(
-          'p',
-          {
-            className: 'ds-series-modal__progress-label'
-          },
-          J,
-          '% watched'
-        ),
-        reactExports.createElement(
-          ProgressBar$1,
-          {
-            className: 'ds-progress-bar ds-progress-bar--secondary',
-            now: J
-          }
-        )
-      ),
-      reactExports.createElement('p', {
-        className: 'ds-series-modal__description'
-      }, l.description),
-      reactExports.createElement(
-        'div',
-        {
-          className: 'ds-series-modal__grid'
-        },
-        j.map(
-          ne => !E.data ||
-            !T.data ||
-            !S.data ? reactExports.createElement('div', {
-              key: ne._id
-          }) : reactExports.createElement(
+          h.createElement(
             'div',
             {
-              key: ne._id,
-              className: 'ds-series-modal__video'
+              className: 'ds-series-modal__doughnut'
             },
-            reactExports.createElement(
-              Link,
+            h.createElement(
+              'p',
               {
-                to: buildLinkTo(l, ne)
+                className: 'ds-series-modal__doughnut-progress'
               },
-              reactExports.createElement(
-                EpisodeCard,
+              de,
+              '%',
+              h.createElement(
+                'small',
                 {
-                  video: ne,
-                  userState: E.data,
-                  watchedVideos: T.data,
-                  playlistItems: S.data,
-                  showDifficulty: !1
-                }
+                  className: 'ds-series-modal__doughnut-label'
+                },
+                'watched'
               )
-            )
-          )
-        ),
-        lodashExports.times(Y).map(
-          ne => reactExports.createElement(
+            ),
+            h.createElement(OR, {
+              progress: de,
+              backgroundColor: vF(p, 0.2),
+              progressColor: p
+            })
+          ),
+          h.createElement(
             'div',
             {
-              key: ne,
-              className: 'ds-series-modal__video'
+              className: 'ds-series-modal__buttons'
             },
-            reactExports.createElement(ComingSoonCard, {
-              episodeNumber: ne + 1 + j.length,
-              series: l
-            })
+            h.createElement(
+              jn,
+              {
+                to: sr({
+                  path: Fo,
+                  language: d,
+                  params: {
+                    series: i._id
+                  }
+                }),
+                size: 'lg',
+                startIcon: h.createElement(un, {
+                  icon: 'thick-play'
+                })
+              },
+              'Play'
+            ),
+            ne &&
+              h.createElement(
+                jn,
+                {
+                  size: 'lg',
+                  variant: 'neutral',
+                  appearance: 'outline',
+                  startIcon: h.createElement(un, {
+                    icon: 'thick-add-playlist',
+                    style: {
+                      color: w7e
+                    }
+                  }),
+                  onClick: b(() => F(i), 'Create a free account to add series to your list.')
+                },
+                'Add to my list'
+              ),
+            fe &&
+              h.createElement(
+                jn,
+                {
+                  size: 'lg',
+                  variant: 'neutral',
+                  appearance: 'outline',
+                  startIcon: h.createElement(un, {
+                    icon: 'thick-remove-playlist',
+                    style: {
+                      color: b7e
+                    }
+                  }),
+                  onClick: () => $(C)
+                },
+                'Remove from my list'
+              )
           )
         )
-      )
-    );
-  return reactExports.createElement(
-    reactExports.Fragment,
-    null,
-    s &&
-      reactExports.createElement(
-        PageMeta,
-        {
-          title: l.title,
-          description: l.description,
-          ogUrl: `https://app.dreaming.com/${ x.toLowerCase() }/series?id=${ l._id }`,
-          ogTitle: l.title,
-          ogDescription: l.description,
-          ogImage: getSeriesArtworkUrl(l._id, 'horizontal'),
-          ogSiteName: 'Dreaming: Language Learning',
-          ogType: 'website',
-          canonical: `https://app.dreaming.com/${ x.toLowerCase() }/series?id=${ l._id }`
-        }
       ),
-    reactExports.createElement(
-      Modal,
-      {
-        className: 'ds-modal ds-series-modal',
-        backdropClassName: 'ds-series-modal--backdrop',
-        show: s,
-        onHide: () => p()
-      },
-      reactExports.createElement(
-        Modal.Header,
-        {
-          className: 'ds-modal__header'
-        },
-        te,
-        reactExports.createElement(
-          'button',
+      W = h.createElement(
+        h.Fragment,
+        null,
+        h.createElement(
+          'div',
           {
-            type: 'button',
-            className: 'ds-modal__close-button',
-            onClick: () => p(),
-            'aria-label': 'Close modal'
+            className: 'ds-series-modal__progress'
           },
-          reactExports.createElement(
-            IconMoon,
+          h.createElement(
+            'p',
             {
-              className: 'ds-modal__close-icon',
-              icon: 'line-close'
+              className: 'ds-series-modal__progress-label'
+            },
+            de,
+            '% watched'
+          ),
+          h.createElement(
+            u1,
+            {
+              className: 'ds-progress-bar ds-progress-bar--secondary',
+              now: de
             }
           )
+        ),
+        h.createElement('p', {
+          className: 'ds-series-modal__description'
+        }, i.description),
+        h.createElement(
+          'div',
+          {
+            className: 'ds-series-modal__grid'
+          },
+          ce.map(
+            De => !T.data ||
+              !P.data ||
+              !D.data ? h.createElement('div', {
+                key: De._id
+              }) : h.createElement(
+                'div',
+                {
+                  key: De._id,
+                  className: 'ds-series-modal__video'
+                },
+                h.createElement(
+                  $v,
+                  {
+                    video: De,
+                    userState: T.data,
+                    watchedVideos: P.data,
+                    playlistItems: D.data,
+                    variant: 'episode',
+                    showDifficulty: !1,
+                    title: h.createElement(h.Fragment, null, 'E', De.episodeNumber, ': ', De.title),
+                    description: De.description ?? '',
+                    showLevelBadge: !1,
+                    to: kBe(i, De, c1(De, y))
+                  }
+                )
+              )
+          ),
+          ns.times(ue).map(
+            De => h.createElement(
+              'div',
+              {
+                key: De,
+                className: 'ds-series-modal__video'
+              },
+              h.createElement(wBe, {
+                episodeNumber: De + 1 + ce.length,
+                series: i
+              })
+            )
+          )
         )
+      );
+  return h.createElement(
+    h.Fragment,
+    null,
+    n &&
+      h.createElement(
+        zu,
+        {
+          title: i.title,
+          description: i.description,
+          ogUrl: `https://app.dreaming.com/${ g.toLowerCase() }/series?id=${ i._id }`,
+          ogTitle: i.title,
+          ogDescription: i.description,
+          ogImage: Toe(i._id, 'horizontal'),
+          ogSiteName: 'Dreaming: Language Learning',
+          ogType: 'website',
+          canonical: `https://app.dreaming.com/${ g.toLowerCase() }/series?id=${ i._id }`
+        }
       ),
-      reactExports.createElement(Modal.Body, {
-        className: 'ds-modal__body'
-      }, $t)
+    h.createElement(
+      ma,
+      {
+        open: n &&
+          !S,
+        onClose: l,
+        size: 'xl',
+        closeOnColor: !0,
+        className: 'ds-series-modal',
+        'data-testid': 'series-modal'
+      },
+      h.createElement('div', {
+        className: 'ds-series-modal__hero'
+      }, Te),
+      h.createElement(ga, {
+        className: 'ds-series-modal__modal-body'
+      }, W)
     ),
-    s &&
-      reactExports.createElement(
+    n &&
+      S &&
+      h.createElement(
         'div',
         {
           className: `ds-series-modal ds-series-modal--mobile ds-animation
             
-          ${ P ? ' ds-fade-in-right' : '' }
+            ${ G ? ' ds-fade-in-right' : '' }
             
-          ${ B ? ' ds-fade-out-right' : '' }
+            ${ z ? ' ds-fade-out-right' : '' }
           
-          `,
+            `,
           role: 'dialog',
-          'data-testid': 'series-modal-mobile'
+          'data-testid': 'series-modal'
         },
-        reactExports.createElement(
+        h.createElement(
           'div',
           {
             className: 'ds-series-modal__header'
           },
-          te,
-          reactExports.createElement(
-            'button',
+          Te,
+          h.createElement(
+            jn,
             {
-              type: 'button',
+              iconOnly: !0,
+              'aria-label': 'Close modal',
+              variant: 'neutral',
+              appearance: 'tonal',
+              shape: 'circle',
+              size: 'xs',
               className: 'ds-series-modal__close-button',
-              onClick: () => I(!0),
-              'aria-label': 'Close modal'
+              onClick: () => ee(!0)
             },
-            reactExports.createElement(
-              IconMoon,
-              {
-                className: 'ds-series-modal__close',
-                icon: 'line-close'
-              }
-            )
+            h.createElement(un, {
+              icon: 'line-close'
+            })
           )
         ),
-        reactExports.createElement('div', {
+        h.createElement('div', {
           className: 'ds-series-modal__body'
-        }, $t)
+        }, W)
       )
   )
-};
+}
