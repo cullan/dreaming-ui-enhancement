@@ -14,16 +14,13 @@ const indexReplacementFileNames = [
   'replacements/SeriesDifficultyBadge.js', // difficulty badge for series
   'replacements/SeriesProgressBar.js', // wrap a series component and display progress beneath it
   // edited components
-  'replacements/CatalogVideoCard.js', // video cards on library page
-  'replacements/EpisodeCard.js', // video card on series detail page
-  'replacements/MyListSeries.js', // series cards on library page
-  'replacements/SeriesCard.js', // series cards on series pages (Series -> level)
-  'replacements/SeriesCarousel.js', // large series carousel on top of series page
-  'replacements/SeriesCatalogs.js', // series cards on series page
-  'replacements/SeriesContinueWatching.js', // continue watching cards on series page
-  'replacements/SeriesModal.js', // series detail page
-  'replacements/VideoCard.js', // videos on watch page
-  'replacements/VideoHorizontalCard.js', // videos on library -> history page
+  'replacements/CardFooter.js',
+  // 'replacements/MyListSeries.js', // series cards on library page
+  // 'replacements/SeriesCard.js', // series cards on series pages (Series -> level)
+  // 'replacements/SeriesCarousel.js', // large series carousel on top of series page
+  // 'replacements/SeriesCatalogs.js', // series cards on series page
+  // 'replacements/SeriesContinueWatching.js', // continue watching cards on series page
+  // 'replacements/SeriesModal.js', // series detail page
   'replacements/VideoThumbnail.js', // video thumbnails with overlay
 ];
 
