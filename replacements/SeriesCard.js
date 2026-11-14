@@ -21,11 +21,12 @@ k7 = (r) => {
       P = h.createElement('span', {
         className: 'sr-only'
       }, D ? `${ d } (premium)` : d);
-  return h.createElement(
+  const card = h.createElement(
     'div',
     {
       className: Ar(Wp.card, c && Wp.fill),
-      'data-testid': p
+      'data-testid': p,
+      'style': { 'position': 'relative' }
     },
     h.createElement(
       w7,
@@ -74,5 +75,16 @@ k7 = (r) => {
       to: g,
       className: Wp.action
     }, P)
-  )
+  );
+  // don't put the progress bar under the continue watching cards
+  // because they include their own progress bar
+  return d.includes('Play')
+    ? card
+    : reactExports.createElement(
+      SeriesProgressBar,
+      {
+        episodes: seriesDataItem.episodes,
+        card
+      }
+    );
 }
