@@ -29,3 +29,10 @@ replacing the original ones.
 [library page](screenshots/library.jpg)
 
 [series level page](screenshots/series-level-page.jpg)
+
+## How to fix breakage after the site is updated
+
+[ ] adjust filename of index and watchpage js files in background.js
+[ ] adjust index filename at top of replacements/VideoSection.js
+[ ] fix aliases in replacements/aliases.js
+[ ] update edited functions and components
