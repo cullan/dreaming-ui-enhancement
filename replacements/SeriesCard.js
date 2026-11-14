@@ -1,65 +1,78 @@
-SeriesCard = ({
-  series,
-  seriesDataItem,
-  onClick = () => {},
-  cardClass = 'ds-series-card',
-  imageClass = 'ds-series-card__image',
-  overlayClass = 'ds-series-card__overlay',
-  titleOverlayClass = 'ds-series-card__title-overlay',
-  artworkType = 'lazy',
-  artworkLoading = 'lazy',
-}) => {
-  const [ showTitleOverlay, setShowTitleOverlay ] = reactExports.useState(false);
-  const card = reactExports.createElement(
-    reactExports.Fragment,
-    null,
-    reactExports.createElement(
+k7 = (r) => {
+  const {
+    series: n,
+    seriesDataItem: i,
+    kind: a = 'vertical',
+    eager: l = !1,
+    fill: c = !1,
+    testId: p = 'series-card',
+    label: d = n.title,
+    to: g,
+    onClick: y,
+    children: b
+  }
+    = r,
+      seriesDataItem = i,
+      [
+        S,
+        T
+      ] = h.useState(!1),
+      D = i?.locked,
+      P = h.createElement('span', {
+        className: 'sr-only'
+      }, D ? `${ d } (premium)` : d);
+  return h.createElement(
+    'div',
+    {
+      className: Ar(Wp.card, c && Wp.fill),
+      'data-testid': p
+    },
+    h.createElement(
+      w7,
+      {
+        type: l ? 'standard' : 'lazy',
+        loading: l ? 'eager' : 'lazy',
+        series: n,
+        kind: a,
+        alt: '',
+        className: Wp.image,
+        onLoad: () => T(!1),
+        onError: () => T(!0)
+      }
+    ),
+    reactExports.createElement(SeriesDifficultyBadgeOverlay, { episodes: seriesDataItem.episodes }),
+    h.createElement(
       'div',
       {
-        className: cardClass,
-        style: { height: 'calc(100% - 4px - 0.3rem)' },
-        onClick: C => onClick(C)
+        className: Ar(Wp.overlay, D && Wp.overlayLocked)
       },
-      reactExports.createElement(
-        SeriesArtwork,
-        {
-          type: artworkType,
-          loading: artworkLoading,
-          series: series,
-          kind: 'vertical',
-          alt: series.title,
-          className: imageClass,
-          onLoad: () => setShowTitleOverlay(false),
-          onError: () => setShowTitleOverlay(true)
-        }
-      ),
-      reactExports.createElement('div', { className: overlayClass }),
-      showTitleOverlay &&
-        reactExports.createElement('div', {
-          className: titleOverlayClass
-        }, series.title),
-      reactExports.createElement(SeriesDifficultyBadgeOverlay, { episodes: seriesDataItem.episodes }),
-      seriesDataItem.locked &&
-        reactExports.createElement(
-          'div',
-          {
-            className: 'ds-series-card__premium-overlay'
-          },
-          reactExports.createElement(
-            IconMoon,
-            {
-              className: 'ds-series-card__premium-icon',
-              icon: 'thick-lock'
-            }
-          )
-        )
-    )
-  );
-  return reactExports.createElement(
-    SeriesProgressBar,
-    {
-      episodes: seriesDataItem.episodes,
-      child: card
-    }
-  );
-};
+      D &&
+        !S &&
+        h.createElement(un, {
+          className: Wp.premiumIcon,
+          icon: 'thick-lock'
+        })
+    ),
+    S ? h.createElement(
+      'div',
+      {
+        className: Wp.title,
+        'aria-hidden': 'true'
+      },
+      D &&
+        h.createElement(un, {
+          className: Wp.premiumIcon,
+          icon: 'thick-lock'
+        }),
+      n.title
+    ) : b,
+    g === void 0 ? h.createElement('button', {
+      type: 'button',
+      className: Wp.action,
+      onClick: y
+    }, P) : h.createElement(Oa, {
+      to: g,
+      className: Wp.action
+    }, P)
+  )
+}

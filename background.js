@@ -15,11 +15,8 @@ const indexReplacementFileNames = [
   'replacements/SeriesProgressBar.js', // wrap a series component and display progress beneath it
   // edited components
   'replacements/CardFooter.js',
-  // 'replacements/MyListSeries.js', // series cards on library page
-  // 'replacements/SeriesCard.js', // series cards on series pages (Series -> level)
+  'replacements/SeriesCard.js', // series cards on series pages (Series -> level)
   // 'replacements/SeriesCarousel.js', // large series carousel on top of series page
-  // 'replacements/SeriesCatalogs.js', // series cards on series page
-  // 'replacements/SeriesContinueWatching.js', // continue watching cards on series page
   // 'replacements/SeriesModal.js', // series detail page
   'replacements/VideoThumbnail.js', // video thumbnails with overlay
 ];
