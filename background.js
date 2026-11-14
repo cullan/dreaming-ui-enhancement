@@ -1,4 +1,9 @@
 const indexReplacementFileNames = [
+  // name aliases
+  // when the site is updated the names are all scrambled.
+  // it appears they are more obfuscated than before as well.
+  // this file will map the bogus obfuscated names to better ones that are used in the other files.
+  'replacements/aliases.js',
   // new functions
   'replacements/seriesDifficultyRange.js', // calculate difficulty range of a series
   // edited functions
@@ -64,12 +69,12 @@ function makeListener(replacementFileNames) {
 
 browser.webRequest.onBeforeRequest.addListener(
   makeListener(indexReplacementFileNames),
-  {urls: ["https://app.dreaming.com/assets/index-qlEw_rQr.js"], types: ["script"]},
+  {urls: ["https://app.dreaming.com/assets/index-BbEUsQaR.js"], types: ["script"]},
   ["blocking"]
 );
 
 browser.webRequest.onBeforeRequest.addListener(
   makeListener(watchPageReplacementFileNames),
-  {urls: ["https://app.dreaming.com/assets/WatchPage-DjPaV3DI.js"], types: ["script"]},
+  {urls: ["https://app.dreaming.com/assets/WatchPage-BET-0Ucl.js"], types: ["script"]},
   ["blocking"]
 );

@@ -3,8 +3,13 @@ export function VideoDifficultyBadge({ difficultyScore = 0 }) {
     Badge,
     {
       variant: 'neutral',
-      size: 'sm',
-      startIcon: 'thick-difficulty',
+      size: 'xs',
+      startIcon: reactExports.createElement(
+        Icon,
+        {
+          icon: 'thick-difficulty'
+        }
+      )
     },
     calculateDifficulty(difficultyScore)
   );

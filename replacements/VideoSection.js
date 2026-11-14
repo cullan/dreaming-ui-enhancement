@@ -1,593 +1,597 @@
-import { VideoDifficultyBadge } from './index-qlEw_rQr.js';
+import { VideoDifficultyBadge } from './index-BbEUsQaR.js';
 
-TU = (le) => {
+si = (n) => {
   const {
-    language: z,
-    video: N,
-    isFetchedVideo: ne,
-    offlineVideo: _,
-    manifest: ae,
-    videoA: fe,
+    language: t,
+    video: a,
+    isFetchedVideo: s,
+    offlineVideo: o,
+    videoA: r,
     videoB: m,
-    autoplaySeconds: ie,
-    autoplayCancelled: Q,
-    series: O,
-    nextVideos: $,
-    displayType: b,
-    source: K,
-    playerReference: v,
-    showPlayer: D,
-    showPlayNext: W,
-    showOverlay: L,
-    showComments: H,
-    showPremiumMessage: re,
-    showBackgroundMessage: he,
-    showPlaylist: Pe,
-    onState: xe,
-    onNextVideo: Se,
-    onShowPlayer: Oe,
-    onShowOverlay: Ke,
-    onCancelPlayNext: A,
-    onShowComments: ce,
-    onShowPremiumMessage: ue,
-    onShowBackgroundMessage: qe,
-    onShowLoginModal: Te,
-    onMarkVideoAsWatched: Ee,
-    onMarkVideoAsUnwatched: Ge
+    feedbackPrompt: p,
+    autoplaySeconds: l,
+    autoplayCancelled: i,
+    series: f,
+    nextVideos: d,
+    displayType: y,
+    source: _,
+    showPlayer: h,
+    requiresAccountToWatch: k,
+    showPlayNext: g,
+    showOverlay: b,
+    showComments: E,
+    showPremiumMessage: I,
+    showBackgroundMessage: T,
+    showPlaylist: w,
+    onNextVideo: S,
+    onShowPlayer: M,
+    onShowOverlay: x,
+    onCancelPlayNext: U,
+    onShowComments: Q,
+    onShowPremiumMessage: F,
+    onShowBackgroundMessage: W,
+    onShowLoginModal: R,
+    onMarkVideoAsWatched: C,
+    onMarkVideoAsUnwatched: A
   }
-  = le,
-  gt = oC(),
-  cn = qR(),
+  = n,
   {
-    browseState: pn
+    registerWatchSlot: L,
+    registerActivePlayer: j,
+    handlePlayerEvent: ne,
+    play: me
   }
-  = Y.useContext(eL),
-  En = Q_(),
-  kt = jR(),
+  = vs(),
+  X = e.useCallback(q => j(q), [
+    j
+  ]),
+  O = e.useCallback(q => L(q), [
+    L
+  ]),
+  V = xt(),
+  Ie = gs(),
   {
-    dispatch: $e
+    browseState: c
   }
-  = Nx(),
-  pt = Ox(),
-  U = KR({
-    language: z
+  = e.useContext(en),
+  ae = Bt(),
+  se = ns(),
+  {
+    user: re,
+    dispatch: oe
+  }
+  = nt(),
+  Ve = Gt(),
+  ve = _s({
+    language: t
   }),
-  ht = Ux({
-    language: z
+  Te = ot({
+    language: t
   }),
-  Rt = J_({
-    language: z
+  ee = Wt({
+    language: t
   }),
-  ze = tD({
-    language: z
+  Ae = Qt({
+    language: t
   }),
   [
-    Gt,
-    an
-  ] = Y.useState(),
+    Le,
+    he
+  ] = e.useState(),
   [
-    Gn,
-    hn
-  ] = Y.useState(!1),
-  Re = Y.useMemo(
+    Fe,
+    ge
+  ] = e.useState(!1),
+  Ue = e.useMemo(
     () => {
-      if (!(!ne || !N || !O) && N.seriesId && b !== 'series') return O.find(zn => zn._id === N.seriesId)
+      if (!(!s || !a || !f) && a.seriesId && y !== 'series') return f.find(q => q._id === a.seriesId)
     },
     [
-      ne,
-      N,
-      O,
-      b
+      s,
+      a,
+      f,
+      y
     ]
   );
-  let Er = 'embed-responsive-16by9';
-  (!N || N.aspectRatio === '2:1') &&
-  (Er = 'embed-responsive-2by1');
-  const Go = Y.useMemo(() => N?._id && `${ Z_ }/${ N._id }.jpg`, [
-    N?._id
+  let _e = 'embed-responsive-16by9';
+  (!a || a.aspectRatio === '2:1') &&
+  (_e = 'embed-responsive-2by1');
+  const Ee = e.useMemo(() => a?._id && `${ qt }/${ a._id }.jpg`, [
+    a?._id
   ]);
-  Y.useEffect(
+  e.useEffect(
     () => {
       if (!new URLSearchParams(window.location.search).get('comments')) return;
-      const tt = new URLSearchParams(window.location.search),
-      Fi = new URLSearchParams(window.location.search);
-      Fi.delete('comments'),
-      gt.replace({
+      const we = new URLSearchParams(window.location.search),
+      ce = new URLSearchParams(window.location.search);
+      ce.delete('comments'),
+      V.replace({
         pathname: window.location.pathname,
-        search: Fi.toString()
+        search: ce.toString()
       }),
-      gt.push({
+      V.push({
         pathname: window.location.pathname,
-        search: tt.toString()
+        search: we.toString()
       })
     },
     []
   ),
-  Y.useEffect(
+  e.useEffect(
     () => {
-      const zn = new URLSearchParams(cn.search).get('comments');
-      !N ||
-      !zn ||
-      tL.next({
+      const q = new URLSearchParams(Ie.search).get('comments');
+      !a ||
+      !q ||
+      tn.next({
         show: !0,
-        identifier: N._id,
-        page: 'Watch',
-        title: N.title,
-        url: window.location.href
+        identifier: a._id,
+        videoLanguage: a.language
       })
     },
     [
-      cn,
-      N
+      Ie,
+      a
     ]
-  );
-  const Je = 992,
-  ms = 200;
-  Y.useEffect(
+  ),
+  e.useEffect(
     () => {
-      let zn = window.innerWidth,
-      tt;
-      const Fi = (At, Ht) => At > Je &&
-      Ht <= Je ||
-      At <= Je &&
-      Ht > Je;
-      function Ho() {
-        clearTimeout(tt),
-        tt = setTimeout(
-          () => {
-            const At = window.innerWidth;
-            Fi(zn, At) &&
-            (ce(!1), an(void 0)),
-            zn = At
-          },
-          ms
-        )
+      const q = window.matchMedia(an('lg'));
+      function we() {
+        Q(!1),
+        he(void 0)
       }
-      return window.addEventListener('resize', Ho),
-      window.addEventListener('orientationchange', Ho),
-      () => {
-        clearTimeout(tt),
-        window.removeEventListener('resize', Ho),
-        window.removeEventListener('orientationchange', Ho)
-      }
+      return q.addEventListener('change', we),
+      () => q.removeEventListener('change', we)
     },
     [
-      ce,
-      an
+      Q,
+      he
     ]
   );
-  const Br = N ? `${ window.location.origin }${ Vo({
-    path: fh,
-    language: z,
+  const be = a ? `${ window.location.origin }${ J({
+    path: ye,
+    language: t,
     params: {
-      id: N._id
+      id: a._id
     }
   }) }` : '',
-  oo = async() => {
-    if (GR) try {
+  Ye = async() => {
+    if (pn && typeof navigator.share == 'function') try {
       await navigator.share({
-        title: N?.title,
-        url: Br
+        title: a?.title,
+        url: be
       })
     } catch {
-    } else hn(!0)
+    } else ge(!0)
   };
-  return Y.createElement(
-    Y.Fragment,
+  return e.createElement(
+    e.Fragment,
     null,
-    Y.createElement(
+    e.createElement(
       'div',
       {
         className: `ds-video-section
           
-        ${ Pe ? 'ds-video-section--collapse' : '' }
+        ${ w ? 'ds-video-section--collapse' : '' }
         
         `,
         'data-testid': 'video-section'
       },
-      Y.createElement(
-        Xg,
+      e.createElement(
+        Ot,
         {
-          className: 'ds-card ds-video-section__card-video'
+          className: 'ds-video-section__card-video'
         },
-        Y.createElement(
-          Xg.Body,
+        e.createElement(
+          Mt,
           {
-            className: 'ds-card__body ds-video-section__card-video-body'
+            className: 'ds-video-section__card-video-content'
           },
-          Y.createElement(
+          e.createElement(
             'div',
             {
-              className: 'ds-card__content ds-video-section__card-video-content'
+              className: 'ds-video-section__embed'
             },
-            Y.createElement(
+            e.createElement(
               'div',
               {
-                className: 'ds-video-section__embed'
+                className: `embed-responsive ${ _e }`
               },
-              Y.createElement(
+              o &&
+              se &&
+              e.createElement(
                 'div',
                 {
-                  className: `embed-responsive ${ Er }`
+                  className: 'ds-video-section__offline'
                 },
-                _ &&
-                kt &&
-                Y.createElement(
+                e.createElement(
+                  'p',
+                  {
+                    className: 'ds-video-section__offline-title'
+                  },
+                  'Offline mode'
+                ),
+                ee ? e.createElement(
+                  'p',
+                  {
+                    className: 'ds-video-section__offline-label'
+                  },
+                  'It seems you\'re trying to watch a video that hasn\'t been downloaded. Download your favorite videos and you can enjoy them offline in the',
+                  e.createElement(
+                    fe,
+                    {
+                      to: sn,
+                      className: 'ds-link-primary'
+                    },
+                    ' Library > Downloads '
+                  ),
+                  'section of our website.'
+                ) : e.createElement(
+                  'p',
+                  {
+                    className: 'ds-video-section__offline-label'
+                  },
+                  'Offline downloads are available with a Premium plan.',
+                  e.createElement('br', null),
+                  e.createElement(
+                    fe,
+                    {
+                      to: J({
+                        path: Tt,
+                        language: t
+                      }),
+                      className: 'ds-link-primary'
+                    },
+                    'Upgrade to premium'
+                  ),
+                  ' ',
+                  'and enjoy watching videos offline anytime!'
+                )
+              ),
+              o &&
+              !se &&
+              e.createElement(
+                'div',
+                {
+                  className: 'ds-video-section__offline'
+                },
+                e.createElement(
+                  'p',
+                  {
+                    className: 'ds-video-section__offline-title'
+                  },
+                  'Offline mode'
+                ),
+                e.createElement(
+                  'p',
+                  {
+                    className: 'ds-video-section__offline-label'
+                  },
+                  'You can watch this video offline by installing the app.'
+                )
+              ),
+              !o &&
+              e.createElement(
+                e.Fragment,
+                null,
+                e.createElement(
                   'div',
                   {
-                    className: 'ds-video-section__offline'
+                    className: 'ds-video-section__default'
                   },
-                  Y.createElement(
-                    'p',
+                  Ee &&
+                  e.createElement(
+                    'img',
                     {
-                      className: 'ds-video-section__offline-title'
-                    },
-                    'Offline mode'
+                      className: 'ds-video-section__default-image',
+                      src: Ee,
+                      alt: 'thumbnail',
+                      'data-testid': 'video-thumbnail'
+                    }
                   ),
-                  Rt ? Y.createElement(
-                    'p',
-                    {
-                      className: 'ds-video-section__offline-label'
-                    },
-                    'It seems you\'re trying to watch a video that hasn\'t been downloaded. Download your favorite videos and you can enjoy them offline in the',
-                    Y.createElement(
-                      wl,
-                      {
-                        to: nL,
-                        className: 'ds-link-primary'
-                      },
-                      ' Library > Downloads '
-                    ),
-                    'section of our website.'
-                  ) : Y.createElement(
-                    'p',
-                    {
-                      className: 'ds-video-section__offline-label'
-                    },
-                    'Offline downloads are available with a Premium plan.',
-                    Y.createElement('br', null),
-                    Y.createElement(
-                      wl,
-                      {
-                        to: Vo({
-                          path: ZI,
-                          language: z
-                        }),
-                        className: 'ds-link-primary'
-                      },
-                      'Upgrade to premium'
-                    ),
-                    ' ',
-                    'and enjoy watching videos offline anytime!'
-                  )
+                  !a &&
+                  e.createElement(Vt, null)
                 ),
-                _ &&
-                !kt &&
-                Y.createElement(
-                  'div',
-                  {
-                    className: 'ds-video-section__offline'
-                  },
-                  Y.createElement(
-                    'p',
-                    {
-                      className: 'ds-video-section__offline-title'
-                    },
-                    'Offline mode'
-                  ),
-                  Y.createElement(
-                    'p',
-                    {
-                      className: 'ds-video-section__offline-label'
-                    },
-                    'You can watch this video offline by installing the app.'
-                  )
-                ),
-                !_ &&
-                Y.createElement(
-                  Y.Fragment,
+                h &&
+                e.createElement(
+                  e.Fragment,
                   null,
-                  Y.createElement(
-                    'div',
-                    {
-                      className: 'ds-video-section__default'
-                    },
-                    Go &&
-                    Y.createElement(
-                      'img',
-                      {
-                        className: 'ds-video-section__default-image',
-                        src: Go,
-                        alt: 'thumbnail',
-                        'data-testid': 'video-thumbnail'
-                      }
-                    ),
-                    !N &&
-                    Y.createElement(iC, null)
-                  ),
-                  D &&
-                  Y.createElement(
-                    Y.Fragment,
-                    null,
-                    K === 'youtube' &&
-                    Y.createElement(
-                      wN,
-                      {
-                        ref: v,
-                        video: N,
-                        onState: xe,
-                        'data-testid': 'video-youtube-player'
-                      }
-                    ),
-                    K === 'bunny' &&
-                    $ &&
-                    $.length > 0 &&
-                    Y.createElement(
-                      pU,
-                      {
-                        ref: v,
-                        video: N,
-                        displayType: b,
-                        manifest: ae,
-                        onState: xe,
-                        onNext: Se,
-                        'data-testid': 'video-shaka-player'
-                      }
-                    )
-                  ),
-                  Y.createElement(
-                    UL,
-                    {
-                      show: re,
-                      loginCallback: () => {
-                        Oe(!0),
-                        ue(!1),
-                        Te(!0),
-                        $e({
+                  _ === K.YOUTUBE &&
+                  e.createElement(ks, {
+                    ref: X,
+                    video: a,
+                    onState: ne
+                  }),
+                  (_ === K.BUNNY || _ === K.CLOUDFLARE) &&
+                  e.createElement('div', {
+                    className: 'ds-persistent-player__slot',
+                    ref: O
+                  })
+                ),
+                I &&
+                e.createElement(
+                  kt,
+                  {
+                    testId: 'premium-message',
+                    image: '/assets/images/icons/premium.svg',
+                    title: 'You\'re trying to watch a premium video.',
+                    subtitle: re?.verified ? 'Subscribe to watch this and more premium videos.' : void 0,
+                    action: {
+                      label: re?.verified ? 'Unlock now' : 'Log in',
+                      onClick: () => {
+                        if (M(!0), F(!1), re?.verified) {
+                          V.push(J({
+                            path: Tt,
+                            language: t
+                          }));
+                          return
+                        }
+                        R(!0),
+                        oe({
                           type: 'SIGN_IN',
                           payload: {
                             isClosable: !1,
                             message: 'Log in to watch this private video.'
                           }
                         })
-                      },
-                      unlockNowCallback: () => {
-                        Oe(!0),
-                        ue(!1),
-                        gt.push(Vo({
-                          path: ZI,
-                          language: z
-                        }))
                       }
                     }
-                  ),
-                  Y.createElement(OL, {
-                    show: he,
-                    continueCallback: () => {
-                      Oe(!0),
-                      qe(!1)
+                  }
+                ),
+                k &&
+                a &&
+                e.createElement(
+                  kt,
+                  {
+                    testId: 'account-message',
+                    image: '/assets/images/logos/light.png',
+                    title: 'Create a free account to watch',
+                    action: {
+                      label: 'Sign up',
+                      onClick: () => oe({
+                        type: 'SIGN_UP',
+                        payload: {
+                          message: 'Create a free account to watch.'
+                        }
+                      })
+                    },
+                    footer: {
+                      text: 'Already have an account?',
+                      action: {
+                        label: 'Log in',
+                        onClick: () => oe({
+                          type: 'SIGN_IN'
+                        })
+                      }
                     }
-                  }),
-                  Y.createElement(
-                    jL,
-                    {
-                      show: L &&
-                      !re &&
-                      !he,
-                      showPlayNext: W,
-                      videoA: fe,
-                      videoB: m,
-                      autoplaySeconds: ie,
-                      autoplayCancelled: Q,
-                      onClose: () => Ke(!1),
-                      onPlay: () => {
-                        v.current?.play(),
-                        Ke(!1)
-                      },
-                      onNextVideo: () => {
-                        Se(),
-                        Ke(!1)
-                      },
-                      cancelPlayNext: A
+                  }
+                ),
+                T &&
+                e.createElement(
+                  kt,
+                  {
+                    image: '/assets/images/icons/premium.svg',
+                    title: 'You\'re trying to watch a video in the background.',
+                    subtitle: 'Subscribe to enable background play on mobile.',
+                    action: {
+                      label: 'Continue watching video',
+                      onClick: () => {
+                        M(!0),
+                        W(!1)
+                      }
                     }
-                  )
+                  }
+                ),
+                e.createElement(
+                  _o,
+                  {
+                    show: b &&
+                    !I &&
+                    !T,
+                    showPlayNext: g,
+                    videoA: r,
+                    videoB: m,
+                    prompt: p,
+                    autoplaySeconds: l,
+                    autoplayCancelled: i,
+                    onClose: () => x(!1),
+                    onPlay: () => {
+                      me(),
+                      x(!1)
+                    },
+                    onNextVideo: () => {
+                      S(),
+                      x(!1)
+                    },
+                    cancelPlayNext: U
+                  }
                 )
               )
-            ),
-            (!ne || !N) &&
-            !_ &&
-            !Pe &&
-            Y.createElement(
-              'div',
-              {
-                className: 'ds-page__spinner'
-              },
-              Y.createElement(iC, null)
-            ),
-            ne &&
-            N &&
-            Y.createElement(
-              'div',
-              {
-                className: `ds-video-section__information
-                    
-                ${ H ||
-                Pe ? 'ds-video-section__information--hidden' : '' }
-                  
-                `
-              },
-              _R(N, pt.data, ht.data, ze, Ee, Ge, oo),
-              xU(N.description),
-              Y.createElement(
-                'div',
-                {
-                  className: 'ds-video-section__badges',
-                  'data-testid': 'video-badges'
-                },
-                DR(pn, N.level, z),
-                Y.createElement(VideoDifficultyBadge, { difficultyScore: N.difficultyScore }),
-                PR(N.private),
-                RR(pn, N.guides, U.data?.guidesDictionary, z),
-                bR(pn, N.guides, z),
-                LR(pn, N.tags, z)
-              ),
-              NR(N.publishedAt),
-              wU(Re, N._id, z),
-              UR({
-                isOnline: En,
-                videoId: N._id,
-                language: z
-              })
-            ),
-            _ &&
-            Y.createElement(
-              'div',
-              {
-                className: `ds-video-section__information
-                    
-                ${ Pe ? 'ds-video-section__information--toggle' : '' }
-                  
-                `
-              },
-              _R(_, pt.data, ht.data, ze, Ee, Ge, oo),
-              Y.createElement(
-                'div',
-                {
-                  className: 'ds-video-section__badges'
-                },
-                DR(pn, _.level, z),
-                PR(_.private),
-                RR(pn, _.guides, U.data?.guidesDictionary, z),
-                bR(pn, _.guides, z),
-                LR(pn, _.tags, z)
-              ),
-              NR(_.publishedAt),
-              N &&
-              UR({
-                isOnline: En,
-                videoId: N._id,
-                language: z
-              })
             )
+          ),
+          (!s || !a) &&
+          !o &&
+          !w &&
+          e.createElement(
+            'div',
+            {
+              className: 'ds-page__spinner'
+            },
+            e.createElement(Vt, null)
+          ),
+          s &&
+          a &&
+          e.createElement(
+            'div',
+            {
+              className: `ds-video-section__information
+                    
+              ${ E ||
+              w ? 'ds-video-section__information--hidden' : '' }
+                  
+              `
+            },
+            Ka(a, Ve.data, Te.data, Ae, C, A, Ye),
+            ni(a.description),
+            e.createElement(
+              'div',
+              {
+                className: 'ds-video-section__badges',
+                'data-testid': 'video-badges'
+              },
+              Ja(c, a.level, t),
+              e.createElement(VideoDifficultyBadge, { difficultyScore: a.difficultyScore }),
+              $a(a.private),
+              Za(c, a.guides, ve.data?.guidesDictionary, t),
+              Xa(c, a.guides, t),
+              es(c, a.tags, t)
+            ),
+            ts(a.publishedAt),
+            oi(Ue, a._id, t),
+            as({
+              isOnline: ae,
+              videoId: a._id,
+              language: t
+            })
+          ),
+          o &&
+          e.createElement(
+            'div',
+            {
+              className: `ds-video-section__information
+                    
+              ${ w ? 'ds-video-section__information--toggle' : '' }
+                  
+              `
+            },
+            Ka(o, Ve.data, Te.data, Ae, C, A, Ye),
+            e.createElement(
+              'div',
+              {
+                className: 'ds-video-section__badges'
+              },
+              Ja(c, o.level, t),
+              $a(o.private),
+              Za(c, o.guides, ve.data?.guidesDictionary, t),
+              Xa(c, o.guides, t),
+              es(c, o.tags, t)
+            ),
+            ts(o.publishedAt),
+            a &&
+            as({
+              isOnline: ae,
+              videoId: a._id,
+              language: t
+            })
           )
         )
       ),
-      !Pe &&
-      Y.createElement(
-        Xg,
+      !w &&
+      e.createElement(
+        Ot,
         {
-          className: 'ds-card ds-video-section__card-comments',
+          className: 'ds-video-section__card-comments',
           'data-testid': 'video-comments-card'
         },
-        Y.createElement(
-          Xg.Body,
+        e.createElement(
+          Mt,
           {
-            className: 'ds-card__body ds-video-section__card-comments-body'
+            className: `
+                ds-video-section__card-comments-content
+                
+            ${ E ? 'ds-video-section__card-comments-content--show' : '' }
+              
+            `
           },
-          Y.createElement(
+          e.createElement(
             'div',
             {
-              className: `
-                  ds-card__content ds-video-section__card-comments-content
-                  
-              ${ H ? 'ds-video-section__card-comments-content--show' : '' }
-                
-              `
+              className: 'ds-video-section__card-comments-header',
+              onClick: () => {
+                Q(!E && ae),
+                he(void 0)
+              },
+              'data-testid': 'video-comments-button'
             },
-            Y.createElement(
+            e.createElement(
               'div',
               {
-                className: 'ds-video-section__card-comments-header',
-                onClick: () => {
-                  ce(!H && En),
-                  an(void 0)
-                },
-                'data-testid': 'video-comments-button'
+                className: 'ds-video-section__card-comments-header-left'
               },
-              Y.createElement(
-                'div',
+              e.createElement(
+                Z,
                 {
-                  className: 'ds-video-section__card-comments-header-left'
-                },
-                Y.createElement(
-                  gs,
-                  {
-                    className: 'ds-video-section__card-comments-header-icon',
-                    icon: 'line-comments'
-                  }
-                ),
-                Y.createElement(
-                  'div',
-                  {
-                    className: 'ds-video-section__card-comments-header-title'
-                  },
-                  H &&
-                  Gt ? Y.createElement('span', null, Gt) : Y.createElement('span', null, 'View comments'),
-                  !En &&
-                  Y.createElement(iL, null)
-                )
+                  className: 'ds-video-section__card-comments-header-icon',
+                  icon: 'line-comments'
+                }
               ),
-              Y.createElement(
+              e.createElement(
                 'div',
                 {
-                  className: 'ds-video-section__card-comments-header-right'
+                  className: 'ds-video-section__card-comments-header-title'
                 },
-                (H || En) &&
-                Y.createElement(
-                  gs,
-                  {
-                    className: 'ds-video-section__card-comments-header-toggle-icon ds-video-section__card-comments-header-toggle-icon--up',
-                    icon: 'thick-arrow-up'
-                  }
-                ),
-                Y.createElement(
-                  gs,
-                  {
-                    className: `
-                        ds-video-section__card-comments-header-toggle-icon ds-video-section__card-comments-header-toggle-icon--down
-                        
-                    ${ H ? 'ds-video-section__card-comments-header-toggle-icon--toggle' : '' }
-                      
-                    `,
-                    icon: 'thick-arrow-down'
-                  }
-                )
+                E &&
+                Le ? e.createElement('span', null, Le) : e.createElement('span', null, 'View comments'),
+                !ae &&
+                e.createElement(nn, null)
               )
             ),
-            N &&
-            H &&
-            Y.createElement(
+            e.createElement(
               'div',
               {
-                className: 'ds-video-section__card-comments-collapsable',
-                'data-testid': 'video-comments-content'
+                className: 'ds-video-section__card-comments-header-right'
               },
-              Y.createElement(
-                rL,
+              (E || ae) &&
+              e.createElement(
+                Z,
                 {
-                  identifier: N._id,
-                  page: 'Watch',
-                  title: N.title,
-                  url: window.location.href,
-                  videoLanguage: N.language,
-                  onCommentsCountChange: zn => {
-                    an(zn)
-                  }
+                  className: 'ds-video-section__card-comments-header-toggle-icon ds-video-section__card-comments-header-toggle-icon--up',
+                  icon: 'thick-arrow-up'
+                }
+              ),
+              e.createElement(
+                Z,
+                {
+                  className: `
+                        ds-video-section__card-comments-header-toggle-icon ds-video-section__card-comments-header-toggle-icon--down
+                        
+                  ${ E ? 'ds-video-section__card-comments-header-toggle-icon--toggle' : '' }
+                      
+                  `,
+                  icon: 'thick-arrow-down'
                 }
               )
+            )
+          ),
+          a &&
+          E &&
+          e.createElement(
+            'div',
+            {
+              className: 'ds-video-section__card-comments-collapsable',
+              'data-testid': 'video-comments-content'
+            },
+            e.createElement(
+              on,
+              {
+                identifier: a._id,
+                videoLanguage: a.language,
+                onCommentsCountChange: q => {
+                  he(q)
+                }
+              }
             )
           )
         )
       )
     ),
-    Y.createElement(
-      sL,
+    e.createElement(
+      rn,
       {
-        show: Gn,
-        videoUrl: Br,
-        videoTitle: N?.title,
-        closeCallback: () => hn(!1)
+        show: Fe,
+        videoUrl: be,
+        videoTitle: a?.title,
+        closeCallback: () => ge(!1)
       }
     )
   )
-};
+}
