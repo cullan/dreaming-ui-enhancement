@@ -1,23 +1,23 @@
-_qe = (r) => {
+ZHe = (i) => {
   const {
-    series: n,
-    seriesDataItems: i
+    series: t,
+    seriesDataItems: r
   }
-    = r,
-      {
-        language: a
-      }
-        = Nr(),
-      [
-        l,
-        c
-      ] = h.useState(0),
-      p = h.useMemo(() => n.length, [
-        n.length
-      ]),
-      d = h.useRef(null),
-      g = h.useRef(null);
-  return h.useEffect(
+    = i,
+    {
+      language: a
+    }
+      = Mr(),
+    [
+      l,
+      c
+    ] = O.useState(0),
+    h = O.useMemo(() => t.length, [
+      t.length
+    ]),
+    d = O.useRef(null),
+    g = O.useRef(null);
+  return O.useEffect(
     () => {
       d.current?.querySelectorAll('.slick-slide').forEach(y => {
         y.inert = y.dataset.index !== String(l)
@@ -25,187 +25,208 @@ _qe = (r) => {
     },
     [
       l,
-      n
+      t
     ]
   ),
-      h.createElement(
+      m.jsxs(
         'section',
         {
           className: 'ds-series-carousel',
           ref: d,
           'aria-roledescription': 'carousel',
-          'aria-label': 'Featured series'
-        },
-        p > 1 &&
-          h.createElement(
-            h.Fragment,
-            null,
-            h.createElement(
-              jn,
-              {
-                iconOnly: !0,
-                shape: 'circle',
-                appearance: 'text',
-                size: 'lg',
-                className: 'ds-series-carousel__arrow ds-series-carousel__arrow--prev',
-                'aria-label': 'Previous series',
-                onClick: () => g.current?.slickPrev()
-              },
-              h.createElement(un, {
-                icon: 'thick-arrow-back'
-              })
-            ),
-            h.createElement(
-              jn,
-              {
-                iconOnly: !0,
-                shape: 'circle',
-                appearance: 'text',
-                size: 'lg',
-                className: 'ds-series-carousel__arrow ds-series-carousel__arrow--next',
-                'aria-label': 'Next series',
-                onClick: () => g.current?.slickNext()
-              },
-              h.createElement(un, {
-                icon: 'thick-arrow-next'
-              })
-            )
-          ),
-        h.createElement(
-          'span',
-          {
-            role: 'status',
-            className: 'sr-only'
-          },
-          l < p ? `${ n[l].title }, ${ l + 1 } of ${ p }` : ''
-        ),
-        h.createElement(
-          Eqe,
-          {
-            ref: g,
-            className: 'ds-series-carousel__carousel',
-            ...bqe,
-            beforeChange: (y, b) => {
-              c(b)
-            }
-          },
-          n.map(
-            (y, b) => {
-              const S = i[y._id],
-              T = kqe(b, l, p);
-              return h.createElement(
-                Vy.Item,
+          'aria-label': 'Featured series',
+          children: [
+            h > 1 &&
+              m.jsxs(
+                m.Fragment,
                 {
-                  key: y._id,
-                  className: 'ds-series-carousel__slide',
-                  role: 'group',
-                  'aria-roledescription': 'slide',
-                  'aria-label': `${ b + 1 } of ${ p }`
+                  children: [
+                    m.jsx(
+                      Dn,
+                      {
+                        iconOnly: !0,
+                        shape: 'circle',
+                        appearance: 'text',
+                        size: 'lg',
+                        className: 'ds-series-carousel__arrow ds-series-carousel__arrow--prev',
+                        'aria-label': 'Previous series',
+                        onClick: () => g.current?.slickPrev(),
+                        children: m.jsx(nn, {
+                          icon: 'thick-arrow-back'
+                        })
+                      }
+                    ),
+                    m.jsx(
+                      Dn,
+                      {
+                        iconOnly: !0,
+                        shape: 'circle',
+                        appearance: 'text',
+                        size: 'lg',
+                        className: 'ds-series-carousel__arrow ds-series-carousel__arrow--next',
+                        'aria-label': 'Next series',
+                        onClick: () => g.current?.slickNext(),
+                        children: m.jsx(nn, {
+                          icon: 'thick-arrow-next'
+                        })
+                      }
+                    )
+                  ]
+                }
+              ),
+            m.jsx(
+              'span',
+              {
+                role: 'status',
+                className: 'visually-hidden',
+                children: l < h ? `${ t[l].title }, ${ l + 1 } of ${ h }` : ''
+              }
+            ),
+            m.jsx(
+              KHe,
+              {
+                ref: g,
+                className: 'ds-series-carousel__carousel',
+                ...YHe,
+                beforeChange: (y, b) => {
+                  c(b)
                 },
-                h.createElement(
-                  w7,
-                  {
-                    type: T ? 'standard' : 'lazy',
-                    series: y,
-                    kind: 'cover',
-                    alt: '',
-                    className: 'ds-series-carousel__cover',
-                    loading: T ? 'eager' : 'lazy'
-                  }
-                ),
-                h.createElement('div', {
-                  className: 'ds-series-carousel__overlay'
-                }),
-                h.createElement(
-                  Vy.Caption,
-                  {
-                    className: 'ds-series-carousel__caption'
-                  },
-                  h.createElement('h2', {
-                    className: 'ds-series-carousel__title'
-                  }, y.title),
-                  h.createElement(
-                    'div',
-                    {
-                      className: 'ds-series-carousel__information'
-                    },
-                    h.createElement(wB, {
-                      level: y.level
-                    }),
-                    reactExports.createElement(SeriesDifficultyBadge, { episodes: S.episodes }),
-                    h.createElement(
+                children: t.map(
+                  (y, b) => {
+                    const S = r[y._id],
+                      T = XHe(b, l, h);
+                    return m.jsxs(
                       'div',
                       {
-                        className: 'ds-series-carousel__information-duration'
+                        className: 'ds-series-carousel__slide',
+                        role: 'group',
+                        'aria-roledescription': 'slide',
+                        'aria-label': `${ b + 1 } of ${ h }`,
+                        children: [
+                          m.jsx(
+                            sw,
+                            {
+                              type: T ? 'standard' : 'lazy',
+                              series: y,
+                              kind: 'cover',
+                              alt: '',
+                              className: 'ds-series-carousel__cover',
+                              loading: T ? 'eager' : 'lazy'
+                            }
+                          ),
+                          m.jsx('div', {
+                            className: 'ds-series-carousel__overlay'
+                          }),
+                          m.jsxs(
+                            'div',
+                            {
+                              className: 'ds-series-carousel__caption',
+                              children: [
+                                m.jsx(
+                                  'h2',
+                                  {
+                                    className: 'ds-series-carousel__title',
+                                    children: y.title
+                                  }
+                                ),
+                                m.jsxs(
+                                  'div',
+                                  {
+                                    className: 'ds-series-carousel__information',
+                                    children: [
+                                      m.jsx(RB, {
+                                        level: y.level
+                                      }),
+                                      reactExports.createElement(SeriesDifficultyBadge, { episodes: S.episodes }),
+                                      m.jsxs(
+                                        'div',
+                                        {
+                                          className: 'ds-series-carousel__information-duration',
+                                          children: [
+                                            m.jsx(
+                                              nn,
+                                              {
+                                                className: 'ds-series-carousel__information-duration-icon',
+                                                icon: 'thick-time'
+                                              }
+                                            ),
+                                            S &&
+                                              m.jsxs(
+                                                'p',
+                                                {
+                                                  className: 'ds-series-carousel__information-duration-label',
+                                                  children: [
+                                                    S.episodes.length,
+                                                    ' Episode(s) • ',
+                                                    eA(S.duration)
+                                                  ]
+                                                }
+                                              )
+                                          ]
+                                        }
+                                      )
+                                    ]
+                                  }
+                                ),
+                                m.jsx(
+                                  'p',
+                                  {
+                                    className: 'ds-series-carousel__description',
+                                    children: y.description
+                                  }
+                                ),
+                                m.jsxs(
+                                  'div',
+                                  {
+                                    className: 'ds-series-carousel__buttons',
+                                    children: [
+                                      m.jsx(
+                                        Dn,
+                                        {
+                                          to: yr({
+                                            path: Yu,
+                                            language: a,
+                                            params: {
+                                              series: y._id
+                                            }
+                                          }),
+                                          size: 'lg',
+                                          startIcon: m.jsx(nn, {
+                                            icon: 'thick-play'
+                                          }),
+                                          children: 'Play'
+                                        }
+                                      ),
+                                      m.jsx(
+                                        Dn,
+                                        {
+                                          to: yr({
+                                            path: Yv,
+                                            language: a,
+                                            params: {
+                                              id: y._id
+                                            }
+                                          }),
+                                          size: 'lg',
+                                          appearance: 'tonal',
+                                          children: 'More info'
+                                        }
+                                      )
+                                    ]
+                                  }
+                                )
+                              ]
+                            }
+                          )
+                        ]
                       },
-                      h.createElement(
-                        un,
-                        {
-                          className: 'ds-series-carousel__information-duration-icon',
-                          icon: 'thick-time'
-                        }
-                      ),
-                      S &&
-                        h.createElement(
-                          'p',
-                          {
-                            className: 'ds-series-carousel__information-duration-label'
-                          },
-                          S.episodes.length,
-                          ' Episode(s) • ',
-                          uT(S.duration)
-                        )
+                      y._id
                     )
-                  ),
-                  h.createElement(
-                    'p',
-                    {
-                      className: 'ds-series-carousel__description'
-                    },
-                    y.description
-                  ),
-                  h.createElement(
-                    'div',
-                    {
-                      className: 'ds-series-carousel__buttons'
-                    },
-                    h.createElement(
-                      jn,
-                      {
-                        to: sr({
-                          path: Fo,
-                          language: a,
-                          params: {
-                            series: y._id
-                          }
-                        }),
-                        size: 'lg',
-                        startIcon: h.createElement(un, {
-                          icon: 'thick-play'
-                        })
-                      },
-                      'Play'
-                    ),
-                    h.createElement(
-                      jn,
-                      {
-                        to: sr({
-                          path: Cv,
-                          language: a,
-                          params: {
-                            id: y._id
-                          }
-                        }),
-                        size: 'lg',
-                        appearance: 'tonal'
-                      },
-                      'More info'
-                    )
-                  )
+                  }
                 )
-              )
-            }
-          )
-        )
+              }
+            )
+          ]
+        }
       )
 }

@@ -1,44 +1,49 @@
-function CardFooter(r) {
+Aue = (i) => {
   const {
-    video: n,
-    className: i,
+    video: t,
+    className: r,
     showLevel: a = !0,
     hideLevelLabel: l = !1,
     premiumVariant: c = 'secondary',
-    hidePremiumLabel: p = !1,
+    hidePremiumLabel: h = !1,
     adultSize: d = 'sm'
   }
-    = r;
-  return h.createElement(
+    = i;
+  return m.jsxs(
     'div',
     {
-      className: i
-    },
-    a &&
-      h.createElement(wB, {
-        level: n.level,
-        hideLabel: l
-      }),
-    reactExports.createElement(VideoDifficultyBadge, { difficultyScore: n.difficultyScore }),
-    n.private &&
-      h.createElement(
-        Jc,
-        {
-          variant: c,
-          size: 'sm',
-          startIcon: 'thick-star',
-          'data-testid': 'video-premium-badge'
-        },
-        h.createElement('span', {
-          className: p ? 'sr-only' : void 0
-        }, 'Premium')
-      ),
-    Fre(n) &&
-      h.createElement(Jc, {
-        variant: 'error-alternative',
-        size: d
-      }, '18+')
+      className: r,
+      children: [
+        a &&
+          m.jsx(RB, {
+            level: t.level,
+            hideLabel: l
+          }),
+        reactExports.createElement(VideoDifficultyBadge, { difficultyScore: t.difficultyScore }),
+        t.private &&
+          m.jsx(
+            Zc,
+            {
+              variant: c,
+              size: 'sm',
+              startIcon: 'thick-star',
+              'data-testid': 'video-premium-badge',
+              children: m.jsx(
+                'span',
+                {
+                  className: h ? 'visually-hidden' : void 0,
+                  children: 'Premium'
+                }
+              )
+            }
+          ),
+        xse(t) &&
+          m.jsx(Zc, {
+            variant: 'error-alternative',
+            size: d,
+            children: '18+'
+          })
+      ]
+    }
   )
 }
-
-roe = CardFooter;

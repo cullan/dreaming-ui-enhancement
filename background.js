@@ -63,12 +63,12 @@ function makeListener(replacementFileNames) {
 
 browser.webRequest.onBeforeRequest.addListener(
   makeListener(indexReplacementFileNames),
-  {urls: ["https://app.dreaming.com/assets/index-BbEUsQaR.js"], types: ["script"]},
+  {urls: ["https://app.dreaming.com/assets/index-U04H6ScC.js"], types: ["script"]},
   ["blocking"]
 );
 
 browser.webRequest.onBeforeRequest.addListener(
   makeListener(watchPageReplacementFileNames),
-  {urls: ["https://app.dreaming.com/assets/WatchPage-BET-0Ucl.js"], types: ["script"]},
+  {urls: ["https://app.dreaming.com/assets/WatchPage-C9On_Wzx.js"], types: ["script"]},
   ["blocking"]
 );

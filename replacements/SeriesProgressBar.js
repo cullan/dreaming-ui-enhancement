@@ -26,13 +26,12 @@ function SeriesProgressBar({ episodes, card }) {
           return reactExports.createElement(
             ProgressBarPiece,
             {
-              key: episode._id,
-              className: `ds-progress-bar ds-progress-bar--no-border ds-progress-bar--success
-                        ${ i === 0 ? 'ds-progress-bar--border-left' : '' }
-                        ${ i === episodes.length - 1 ? 'ds-progress-bar--border-right' : '' }
-                        `,
-              now: progress
-            }
+              tone: 'success',
+              className: 'ds-series-continue-watching__episode-bar',
+              value: progress,
+              'aria-label': `Episode ${ i + 1 }`
+            },
+            episode._id
           )
         }
       )

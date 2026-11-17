@@ -1,8 +1,9 @@
-const Badge = Jc;
-const Icon = un;
-const reactExports = h;
-const calculateDifficulty = LO;
-const useLanguage = Nr;
-const useGetAllWatchedVideos = F0;
-const percentage = f8;
-const ProgressBarPiece = u1;
+// comments are things to search for to find it
+
+const Badge = Zc; // startIcon: '
+export const reactExports = Ft; // .createElement
+const calculateDifficulty = PR; // .difficultyScore
+const useLanguage = Mr; // language:
+const useGetAllWatchedVideos = fd; // watchedVideos:
+const percentage = Ux; // Number.EPSILON
+const ProgressBarPiece = Jv; // __episode-progress
